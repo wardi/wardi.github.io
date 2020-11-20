@@ -95,9 +95,9 @@ This work was sponsored by **OpenGov** and incorporated into CKAN 2.7 with the h
 
 ## References
 
-  - CKAN: https://ckan.org/
-  - Sponsor: https://opengov.com/
-  - PostgreSQL JSON functions: https://www.postgresql.org/docs/9.3/static/functions-json.html
-  - simplejson RawJSON feature: https://github.com/simplejson/simplejson/pull/143
-  - New total calculation changes: https://github.com/ckan/ckan/pull/3467
-  - Search performance changes: https://github.com/ckan/ckan/pull/3523
+  - [CKAN](https://ckan.org/)
+  - [Sponsor](https://opengov.com/)
+  - [PostgreSQL JSON functions](https://www.postgresql.org/docs/9.3/static/functions-json.html)
+  - [simplejson RawJSON feature](https://github.com/simplejson/simplejson/pull/143)
+  - [New total calculation changes](https://github.com/ckan/ckan/pull/3467)
+  - [Search performance changes](https://github.com/ckan/ckan/pull/3523)
