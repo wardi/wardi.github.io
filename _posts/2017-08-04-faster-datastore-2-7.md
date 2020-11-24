@@ -6,7 +6,7 @@ redirect_from: /2017/08/faster-datastore-ckan-2-7/
 excerpt_separator: <!--more-->
 ---
 
-The newly released CKAN 2.7 adds new functionality and makes DataStore search up to **17x** faster at the same time.
+CKAN 2.7 comes with new functionality and makes DataStore search up to **17x** faster at the same time.
 
 This article covers:
 - new total row calculation
