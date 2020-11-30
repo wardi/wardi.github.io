@@ -12,11 +12,18 @@ layout: default
           <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
         </div>
       </a>
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
+      {% if post.inline %}
+        <div class="entry">
+          {{ post.content }}
+        </div>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+      {% else %}
+        <div class="entry">
+          {{ post.excerpt }}
+        </div>
+
+        <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Continue reading…</a>
+      {% endif %}
     </article>
   {% endfor %}
 
