@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ckanapi and ckanet-scheming
+title: ckanapi and ckanext-scheming
 categories: [Software, Python, CKAN]
 redirect_from: /2015/06/ckanapi-ckanext-scheming/
 inline: true
