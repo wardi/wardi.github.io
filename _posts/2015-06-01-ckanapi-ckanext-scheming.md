@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ckanapi and ckanext-scheming
-categories: [Software, Python, CKAN]
+categories: [Open Data, Python, CKAN]
 redirect_from: /2015/06/ckanapi-ckanext-scheming/
 inline: true
 ---
