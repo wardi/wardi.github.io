@@ -2,7 +2,7 @@
 layout: post
 title: Faster DataStore in CKAN 2.7
 categories: [Open Data, Python, CKAN]
-redirect_from: /2017/08/faster-datastore-ckan-2-7/
+redirect_from: /article/2017/08/faster-datastore-ckan-2-7/
 excerpt_separator: <!--more-->
 ---
 
