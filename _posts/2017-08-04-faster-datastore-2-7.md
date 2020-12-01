@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Faster DataStore in CKAN 2.7
+title: Faster datastore_search in CKAN
 categories: [Open Data, Python, CKAN]
 redirect_from: /article/2017/08/faster-datastore-ckan-2-7/
 excerpt_separator: <!--more-->
 ---
 
-CKAN 2.7 comes with new functionality and makes DataStore search up to **17x** faster at the same time.
+CKAN's `datastore_search` now comes with format options and is up to **17x** faster.
 
 This article covers:
 - new total row calculation
@@ -17,7 +17,7 @@ This article covers:
 
 **TL;DR:**
 
-1. Upgrade to 2.7 then resource views and other code that uses `datastore_search` is faster with no other changes required
+1. Use CKAN 2.7 or later and resource views and other code that uses `datastore_search` is faster with no other changes required
 2. Update your `datastore_search` client code to use one of the new `records_format=csv` and/or `include_total=false` options to make it much, much faster
 
 <!--more-->
