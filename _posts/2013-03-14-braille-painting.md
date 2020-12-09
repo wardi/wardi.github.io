@@ -14,6 +14,7 @@ Unicode page U+2800 has all the combinations of a 2x4 grid of Braille dots. Brai
 
 <!--more-->
 
+
 So I decided to have a little fun and write the whole thing as a generator expression. Let me know if you have any improvements!
 
 [https://gist.github.com/wardi/5131529](https://gist.github.com/wardi/5131529)
