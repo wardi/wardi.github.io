@@ -1,7 +1,7 @@
 ---
 layout: post
 title: IEEE AUTOTESTCON paper
-categories: [Software Radio, Python]
+categories: [Software Radio]
 redirect_from: /article/2013/10/ieee-autotestcon-paper/
 inline: true
 ---

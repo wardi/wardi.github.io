@@ -1,7 +1,7 @@
 ---
 layout: post
 title: CKAN Schemas and Multilingual Metadata
-categories: [Open Data, Python, CKAN]
+categories: [Open Data]
 redirect_from: /article/2014/09/ckan-schemas-and-multilingual/
 excerpt_separator: <!--more-->
 ---
