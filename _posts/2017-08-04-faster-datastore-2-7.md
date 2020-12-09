@@ -22,7 +22,7 @@ This article covers:
 
 <!--more-->
 
-*update* This post now appears on the [ckan.org blog](https://web.archive.org/web/20200512012610/https://ckan.org/2017/08/10/faster-datastore-in-ckan-2-7/)
+*update* This post now appears on the [ckan.org blog](https://ckan.org/2017/08/10/faster-datastore-in-ckan-2-7/)
 
 ## Total Row Calculation
 
