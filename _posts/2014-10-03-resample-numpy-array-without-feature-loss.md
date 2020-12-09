@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Resample Numpy Array without Feature Loss
-categories: [numpy, Python]
+title: Resample NumPy Array without Feature Loss
+categories: [NumPy]
 redirect_from: /article/2014/10/resample-numpy-array-without-feature-loss/
 excerpt_separator: <!--more-->
 ---

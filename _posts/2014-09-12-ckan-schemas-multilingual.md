@@ -1,7 +1,7 @@
 ---
 layout: post
 title: CKAN Schemas and Multilingual Metadata
-categories: [Open Data]
+categories: [CKAN]
 redirect_from: /article/2014/09/ckan-schemas-and-multilingual/
 excerpt_separator: <!--more-->
 ---

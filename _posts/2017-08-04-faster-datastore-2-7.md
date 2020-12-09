@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Faster datastore_search in CKAN
-categories: [Open Data]
+categories: [CKAN]
 redirect_from: /article/2017/08/faster-datastore-ckan-2-7/
 excerpt_separator: <!--more-->
 ---

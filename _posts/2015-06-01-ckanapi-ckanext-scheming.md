@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ckanapi and ckanext-scheming
-categories: [Open Data]
+categories: [CKAN]
 redirect_from: /article/2015/06/ckanapi-ckanext-scheming/
 inline: true
 ---
