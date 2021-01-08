@@ -15,3 +15,4 @@ title: Projects
 - [jsonlines](https://jsonlines.org) maintainer
 - [pyrf](https://pyrf.readthedocs.io/en/latest/) contributor
 - [speedometer](/speedometer) author
+- [xterm_colour_chart](https://github.com/wardi/xterm_colour_chart) author
