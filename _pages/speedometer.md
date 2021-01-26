@@ -16,13 +16,13 @@ Github: [https://github.com/wardi/speedometer](https://github.com/wardi/speedome
 
 ## Screenshots
 
-![screenshot with dark transparent backgrounds](/assets/speedometer-transp1.png "16 color mode with dark transparent background")
+![screenshot with dark transparent backgrounds](/images/speedometer-transp1.png "16 color mode with dark transparent background")
 
-![screenshot with light background](/assets/speedometer-light16.png "16 color mode with light background")
+![screenshot with light background](/images/speedometer-light16.png "16 color mode with light background")
 
-![screenshot of 256 color mode](/assets/speedometer-256.png "256 color mode")
+![screenshot of 256 color mode](/images/speedometer-256.png "256 color mode")
 
-![screenshot of monochrome mode](/assets/speedometer-mono.png "monochrome mode")
+![screenshot of monochrome mode](/images/speedometer-mono.png "monochrome mode")
 
 ## Installation
 
