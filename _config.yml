@@ -89,7 +89,7 @@ whitelist:
 
 include: ['_pages']
 
-paginate: 6
+paginate: 18
 paginate_path: /page:num/
 
 # Exclude these files from your production _site
