@@ -24,7 +24,7 @@ subfields.
 Repeating subfields let you define a group of fields to repeat within dataset and resource forms.
 All of the features available for normal ckanext-scheming fields can be used in subfields.
 
-![ckanext-scheming repeating fields](/images/repeating_subfields.png)
+![ckanext-scheming repeating fields](/images/repeating_subfields.gif)
 
 `repeating_label` may be used to provide a singular label for each group of subfields.
 
@@ -102,7 +102,7 @@ If you need these features consider discussing your work on a
 Multiple text fields improve on the `repeating_text` fields from ckanext-repeating with a dynamic form
 with add and remove buttons.
 
-![ckanext-scheming multiple_text](/images/repeating_subfields.png)
+![ckanext-scheming multiple_text](/images/multiple_text.gif)
 
 ```yaml
 - field_name: contributors
