@@ -120,7 +120,7 @@ Data stored in repeating text fields is represented as lists of strings in the A
 ],
 ```
 
-`required: true` validation is supported to require at least one entry. Per-field and other types of
+`required: true` may be used to require at least one entry. Per-field and other types of
 validation are not yet implemented. Add a comment to the
 [multiple text validation issue](https://github.com/ckan/ckanext-scheming/issues/276)
 if you would like to work on this feature.
