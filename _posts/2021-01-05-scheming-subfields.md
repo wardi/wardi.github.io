@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Repeating Subfields with ckanext-scheming
+title: Repeating Subfields and Multiple Text with ckanext-scheming
 categories: [CKAN]
 redirect_from:
 excerpt_separator: <!--more-->
@@ -108,6 +108,16 @@ with add and remove buttons.
 - field_name: contributors
   label: Contributors
   preset: multiple_text
+```
+
+Data stored in repeating text fields is represented as lists of strings in the API.
+
+```json
+"contributors": [
+  "Person A",
+  "Person B",
+  "Person C"
+],
 ```
 
 `required: true` validation is supported to require at least one entry. Per-field and other types of
