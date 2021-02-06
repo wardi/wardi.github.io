@@ -8,7 +8,7 @@ excerpt_separator: <!--more-->
 
 [ckanext-scheming](https://github.com/ckan/ckanext-scheming) 2.1
 now support Datasets with repeating subfields and repeating text fields.
-Repeating subfieds support custom snippets and validation without any changes.
+Repeating subfieds support custom snippets and validation just like regular fields.
 
 This work is inspired by the excellent [ckanext-composite](https://github.com/EnviDat/ckanext-composite)
 extension and replaces [ckanext-repeating](https://github.com/open-data/ckanext-repeating) `repeating_text`
