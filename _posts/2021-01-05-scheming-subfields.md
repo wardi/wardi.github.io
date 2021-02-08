@@ -114,7 +114,7 @@ For `submission_flags` to accept multiple values we must add a multivalued field
 `<fields>` configuration:
 
 ```xml
-    <field name="submission_flags" type="string" indexed="true" stored="true" multiValued="true"/>
+<field name="submission_flags" type="string" indexed="true" stored="true" multiValued="true"/>
 ```
 
 These new fields will now be available for use with CKAN
