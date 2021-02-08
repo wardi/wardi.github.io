@@ -81,13 +81,53 @@ Data stored in subfields is represented as lists of JSON objects in the API.
 Normal and custom validation rules apply and are displayed in the form by referencing the subfield
 group and the field with the error, e.g. "Submission 2: Text: Missing value"
 
-Repeating subfields can't be indexed in SOLR with CKAN's default schema and indexing code since
-they expect extra fields to contain simple string values. Create a new IPackageController plugin
-and SOLR schema to handle indexing repeating subfields the best way for your own site, or use the
-included `scheming_nerf_index` plugin that passes repeating fields to SOLR as JSON strings to
-prevent indexing errors.
+### Indexing Repeating Subfields
 
-Future CKAN support for dynamic fields in SOLR will simplify this required configuration.
+Repeating subfields can't be indexed in Solr with CKAN's default schema and indexing code since
+they expect extra fields to contain simple string values. Create a new
+[IPackageController `before_index` plugin](https://docs.ckan.org/en/2.9/extensions/plugin-interfaces.html?#ckan.plugins.interfaces.IPackageController.before_index)
+and Solr schema to handle indexing repeating subfields the best way for your own site.
+
+```python
+class SubmissionsIndexPlugin(p.SingletonPlugin):
+    """
+    Map submission dataset fields to Solr fields
+    """
+    p.implements(p.IPackageController, inherit=True)
+
+    def before_index(self, data_dict):
+        flags = set()
+        text = []
+        for sub in data_dict.get('submission', []):
+            text.append(sub['text'])
+            flags |= set(sub['flags'])
+
+        # replace list of dicts with plain text to prevent Solr errors
+        data_dict['submission'] = '\n'.join(text)
+        # index flags present in any submission
+        data_dict['submission_flags] = sorted(flags)
+
+        return data_dict
+```
+
+For `submission_flags` to accept multiple values we must add a multivalued field to our Solr schema
+`<fields>` configuration:
+
+```xml
+    <field name="submission_flags" type="string" indexed="true" stored="true" multiValued="true"/>
+```
+
+These new fields will now be available for use with CKAN
+[advanced search](https://docs.ckan.org/en/2.9/user-guide.html#advanced-search) e.g.
+`submission:example` or `submission_flags:D`.
+
+If you don't need advanced search or faceting based on repeating subfields you may use the included
+`scheming_nerf_index` plugin. This plugin passes repeating fields to Solr as JSON strings to prevent
+indexing errors instead and doesn't require a customized Solr schema.
+
+Future CKAN support for dynamic fields in Solr will simplify this required configuration.
+
+### Future Work
 
 Some features not yet supported:
  - validating the number of subfield groups (e.g. requiring at least one)
