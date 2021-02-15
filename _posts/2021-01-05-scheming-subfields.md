@@ -28,6 +28,8 @@ All of the features available for normal ckanext-scheming fields can be used in 
 
 `repeating_label` may be used to provide a singular label for each group of subfields.
 
+`repeating_subfields` contains a list of field definitions to repeat.
+
 ```yaml
 - field_name: submission
   label: Submissions
