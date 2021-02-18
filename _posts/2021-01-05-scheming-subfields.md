@@ -107,7 +107,7 @@ class SubmissionsIndexPlugin(p.SingletonPlugin):
         # replace list of dicts with plain text to prevent Solr errors
         data_dict['submission'] = '\n'.join(text)
         # index flags present in any submission
-        data_dict['submission_flags] = sorted(flags)
+        data_dict['submission_flags'] = sorted(flags)
 
         return data_dict
 ```
