@@ -8,3 +8,4 @@ inline: true
 - [Half-Precision Floating-Point, Visualized](https://observablehq.com/@rreusser/half-precision-floating-point-visualized)
 - [Johnny•Decimal](https://johnnydecimal.com/)
 - [PostgreSQL index optimizations](https://hakibenita.com/postgresql-unused-index-size)
+- [“A Mind is Born” 256-byte demo](https://linusakesson.net/scene/a-mind-is-born/)
