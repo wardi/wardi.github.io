@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Homebrew CPU Plan Step 1
+title: Simple Clock Circuit with a 555 Timer
 categories: [Electronics]
 excerpt_separator: <!--more-->
 ---
