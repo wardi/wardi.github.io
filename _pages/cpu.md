@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Homebrew CPU Project
+permalink: /cpu/
 ---
 
 ## Homebrew CPU Plan Step 1
