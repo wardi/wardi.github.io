@@ -33,3 +33,9 @@ permalink: /cpu/
 [![16-bit Address Register](/images/16bit.jpg)](https://youtu.be/FKlDwOu2p_8)
 
 [transcript](/16bit/)
+
+## Power-on and Manual Reset Circuit
+
+[![Power-on and Manual Reset Circuit](/images/reset.jpg)](https://youtu.be/gnpy3CmJbko)
+
+[transcript](/reset/)
