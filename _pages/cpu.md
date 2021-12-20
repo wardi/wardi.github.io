@@ -39,3 +39,9 @@ permalink: /cpu/
 [![Power-on and Manual Reset Circuit](/images/reset.jpg)](https://youtu.be/gnpy3CmJbko)
 
 [transcript](/reset/)
+
+## Clock Halt Circuit with 4011 NAND Gate and 555 Timer
+
+[![Clock Halt Circuit with 4011 NAND Gate and 555 Timer](/images/halt.jpg)](https://youtu.be/-j5fzLaksTk)
+
+[transcript](/halt/)
