@@ -84,6 +84,8 @@ we can combine sending character codes and LCD commands into 8 bits.
 If we also reassign the upper 4 bits (DB4-DB7) we can assign new positions
 for commands in the table.
 
+<img src="/images/behind-lcd.jpg" height="400" alt="Lookup table circuit">
+
 Reassigning the upper 4 bits is the same as moving a command left or
 right in the table.
 
@@ -109,6 +111,4 @@ side of the display.
 
 Thank you for reading this far. In the next post we'll explore the
 software that encodes video onto the 32K EEPROM using these commands.
-
-![Lookup table circuit](/images/behind-lcd.jpg)
 
