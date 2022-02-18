@@ -32,11 +32,14 @@ pixel space in between.
 <img src="/images/screen.svg" height="300" alt="20 x 4 LCD display memory">
 
 The memory used to display characters is
-split into two banks of 80 bytes interlaced so that lines 1 and 3
-are bank 1 (D00-D39) and lines 2 and 4 are in bank 2 (E00-E39).
+split into two banks of 80 bytes each. The banks are interlaced so that
+bank 1 (D00-D39) covers lines 1 and 3, and bank 2 (E00-E39) covers
+lines 2 and 4.
 
-Bad Apple is in 4:3 aspect ratio which maps nicely to 40:32 pixels
-given by taking the first 8 columns and 4 rows.
+Our video area includes addresses 00-07 and 20-27 in both banks.
+
+Bad Apple has a 4:3 aspect ratio which maps nicely to the 40 x 32 total
+pixels in our video area of 8 columns and 4 rows.
 
 ## Character ROM
 
@@ -49,9 +52,8 @@ the solid parts of the video area.
 
 ## CGRAM
 
-Custom character patterns are made possible with CGRAM. This display
-module has 8 CGRAM characters we can use (CG0-CG7), so up to 1/4 of
-our 8 x 4 video area character cells can display a unique pattern at once.
+Custom character patterns are made possible with CGRAM. We
+have 8 CGRAM characters (CG0-CG7):
 
 <img src="/images/cg-pattern.svg" height="300" alt="CGRAM memory">
 
@@ -59,6 +61,11 @@ The pixel patterns are given by the low 5 bits stored at each CGRAM address.
 CGRAM is contiguous but we number the addresses based on the
 character and row. E.g. C10 is the first row of CG1, and follows immediately
 after C07.
+
+With only 8 CGRAM characters *at least* 75% of our video area character cells
+need to be blank or a solid block. We'll have to be clever about prioritizing
+use of CGRAM character cells to make it seem like the whole video area is a
+bitmap.
 
 ## LCD commands
 
