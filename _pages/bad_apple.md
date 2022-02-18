@@ -27,7 +27,7 @@ has 20 columns of characters and 4 rows of character cells.
 Each character cell is a 5 x 8 grid of pixels with a single
 pixel space in between.
 
-<img src="/images/screen.svg" height="200" alt="20 x 4 LCD display memory">
+<img src="/images/screen.svg" height="300" alt="20 x 4 LCD display memory">
 
 The memory used to display characters is
 split into two banks of 80 bytes interlaced so that lines 1 and 3
@@ -36,7 +36,7 @@ are bank 1 (D00-D39) and lines 2 and 4 are in bank 2 (E00-E39).
 Bad Apple is in 4:3 aspect ratio which maps nicely to 40:32 pixels
 given by taking the first 8 columns and 4 rows.
 
-<img src="/images/character-codes.svg" height="500" alt="character ROM">
+<img src="/images/character-codes.svg" height="600" alt="character ROM">
 
 The character ROM on the LCD display module includes a "space"
 character with none of the pixels set and a solid block character
@@ -49,7 +49,7 @@ Custom character patterns are made possible with CGRAM. This display
 module has 8 CGRAM characters we can use (CG0-CG7), so up to 1/4 of
 our 8 x 4 video area character cells can display a unique pattern at once.
 
-![CGRAM memory](/images/cg-pattern.svg)
+<img src="/images/cg-pattern.svg" height="300" alt="CGRAM memory">
 
 The pixel patterns are given by the low 5 bits stored at each CGRAM address.
 CGRAM is contiguous but we number the addresses based on the
@@ -61,7 +61,7 @@ after C07.
 We interface with the LCD display module using 8 data pins (DB0-DB7)
 and a register select (RS) pin.
 
-<img src="/images/commands.svg" height="500" alt="LCD commands">
+<img src="/images/commands.svg" height="600" alt="LCD commands">
 
 When RS is high we can send character codes
 to display memory or data into CGRAM. When RS is low we can set the
@@ -72,7 +72,7 @@ Rearranging the table into a grid like the character codes above
 we can see there are some unused commands and commands with duplicate
 values:
 
-<img src="/images/command-grid.svg" height="500" alt="LCD command grid">
+<img src="/images/command-grid.svg" height="600" alt="LCD command grid">
 
 ## Command compression
 
@@ -87,12 +87,10 @@ for commands in the table.
 Reassigning the upper 4 bits is the same as moving a command left or
 right in the table.
 
-![Lookup table circuit](/images/behind-lcd.jpg)
-
 This is the combined "decompression" table that maps the 8 input bits from
 the EEPROM to 9 output bits for the LCD display module:
 
-<img src="/images/hexmap.svg" height="400" alt="LCD command mapping">
+<img src="/images/hexmap.svg" height="600" alt="LCD command mapping">
 
 This table allows issuing one command per clock cycle from our EEPROM to our
 LCD display module including:
@@ -111,3 +109,6 @@ side of the display.
 
 Thank you for reading this far. In the next post we'll explore the
 software that encodes video onto the 32K EEPROM using these commands.
+
+![Lookup table circuit](/images/behind-lcd.jpg)
+
