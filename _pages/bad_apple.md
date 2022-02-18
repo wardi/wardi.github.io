@@ -7,11 +7,13 @@ permalink: /bad-apple/
 [![Bad Apple on 32K EEPROM](/images/bad-apple.jpg)
 Watch "Bad Apple on 32K EEPROM" on Youtube](#)
 
-To test step 1 of the [homebrew cpu project](/cpu) let's see
+To test step 1 of the [homebrew cpu project](/cpu) we'll see
 if we can play an actual video from the EEPROM to the LCD character
-display module. Bad Apple is a great video for this purpose: it's
+display module. Bad Apple is an ideal video for this purpose: it's
 essentially monochrome and most of the video is recognizable even
 at a very low resolution.
+
+![Original Bad Apple](/images/original-apple.png)
 
 The original Bad Apple video has 6569 frames at 30 fps for a running
 time of 3m39s. We have 32768 bytes so we need to run
@@ -35,6 +37,8 @@ are bank 1 (D00-D39) and lines 2 and 4 are in bank 2 (E00-E39).
 
 Bad Apple is in 4:3 aspect ratio which maps nicely to 40:32 pixels
 given by taking the first 8 columns and 4 rows.
+
+## Character ROM
 
 <img src="/images/character-codes.svg" height="600" alt="character ROM">
 
@@ -63,16 +67,19 @@ and a register select (RS) pin.
 
 <img src="/images/commands.svg" height="600" alt="LCD commands">
 
-When RS is high we can send character codes
-to display memory or data into CGRAM. When RS is low we can set the
+When RS is low we can set the
 display memory (DDRAM) or CGRAM address, clear the screen or issue
 other cursor and display commands.
+When RS is high we can write character data
+to display memory (DDRAM) or send pixel data into CGRAM.
 
-Rearranging the table into a grid like the character codes above
-we can see there are some unused values and commands with duplicate
-values:
+This code table can be expanded into a grid like the character ROM grid above:
 
 <img src="/images/command-grid.svg" height="600" alt="LCD command grid">
+
+We can see there are some unused values, like most of the function set
+range and part of the set DDRAM address range. There are also some commands
+with duplicate values like cursor or display shift commands and return home.
 
 ## Command compression
 
@@ -81,15 +88,19 @@ RS to fully control the LCD display module.
 
 If we add a 256-byte lookup table for RS then
 we can combine sending character codes and LCD commands into 8 bits.
-If we also reassign the upper 4 bits (DB4-DB7) we can assign new positions
+Also if we reassign the upper 4 bits (DB4-DB7) we can assign new positions
 for commands in the table.
+
+This is how the lookup table is wired to RS and the upper 4 bits (DB4-DB7):
 
 <img src="/images/behind-lcd.jpg" height="400" alt="Lookup table circuit">
 
-Reassigning the upper 4 bits is the same as moving a command left or
-right in the table.
+In the table reassigning the upper 4 bits is the same as moving a command left or
+right. This lets us fill in unused values or repeated commands, move the set
+CGRAM address and function set commands out of the way, and replace unneeded
+commands.
 
-This is the combined lookup table that maps the 8 input bits from
+This is the combined lookup table that we use to map the 8 input bits from
 the EEPROM to 9 output bits for the LCD display module:
 
 <img src="/images/hexmap.svg" height="600" alt="LCD command mapping">
