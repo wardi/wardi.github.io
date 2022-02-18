@@ -69,7 +69,7 @@ display memory (DDRAM) or CGRAM address, clear the screen or issue
 other cursor and display commands.
 
 Rearranging the table into a grid like the character codes above
-we can see there are some unused commands and commands with duplicate
+we can see there are some unused values and commands with duplicate
 values:
 
 <img src="/images/command-grid.svg" height="600" alt="LCD command grid">
@@ -89,12 +89,12 @@ for commands in the table.
 Reassigning the upper 4 bits is the same as moving a command left or
 right in the table.
 
-This is the combined "decompression" table that maps the 8 input bits from
+This is the combined lookup table that maps the 8 input bits from
 the EEPROM to 9 output bits for the LCD display module:
 
 <img src="/images/hexmap.svg" height="600" alt="LCD command mapping">
 
-This table allows issuing one command per clock cycle from our EEPROM to our
+This mapping allows issuing one command per clock cycle from our EEPROM to our
 LCD display module including:
 
 - addressing all CGRAM
@@ -109,6 +109,6 @@ LCD display module including:
 These are all we need to play our video and show text on the right
 side of the display.
 
-Thank you for reading this far. In the next post we'll explore the
+👍 Thank you for reading this far. In the next post we'll explore the
 software that encodes video onto the 32K EEPROM using these commands.
 
