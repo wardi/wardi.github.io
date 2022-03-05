@@ -38,6 +38,8 @@ other Python scripts.
 [`lookup_table.py`](https://github.com/wardi/cpu/blob/main/bad-apple/lookup_table.py)
 contains a text version of the command lookup table:
 
+<img src="/images/hexmap-top.svg" width="510" alt="LCD command mapping">
+
 ```python
 # byte order from top->bottom, left->right
 # (mnemonic:)hex-value
@@ -49,30 +51,26 @@ CRT:01 C23:05 12 13 14 15 16 17 D03:08 D19:09 C03:04 C43:06 E03:0c E19:0d E35:0e
 ...
 ```
 
-Where the (optional) mnemonic labels a value in the table and the hex value is the
+The optional mnemonic labels a value and the hex value is the
 value stored at that location in the table. The low 4 bits of the hex value are
 connected to the high data lines of the HD44780 controller and the next bit is connected
-to the RS line. Let's look at three examples:
+to the RS line. Let's look at two examples:
 
-The first position in the top left is position 0, which has:
-- a mnemonic of `C00`
-- a value of `0x04` which means "set RS to 0 and D4-D7 to `0b0100`"
-- D0-D3 are copied from the low bits of the data value `0b0000`
-- sending this data value of `0` will move to CGRAM character 0, line 0
+The second position on the left `CLR:00` is offset `0x01` in order from top to bottom:
+- has a mnemonic of `CLR`
+- has a hex value of `0x00` which means "set RS to 0 and D4-D7 to `0b0000`"
+- D0-D3 are copied from the low bits of the offset value `0b0001`
+- sending this command will clear the screen and reset the cursor position
+  on the LCD display
 
-The next position below the last is position 1, which has:
-- a mnemonic of `CLR`
-- a value of `0x00` which means "set RS to 0 and D4-D7 to `0b0000`"
-- D0-D3 are copied from the low bits of the data value `0b0001`
-- sending this byte value of `1` will clear the screen and reset the cursor
-
-The first position in the 6th column is position 80, which has:
-- no mnemonic but corresponds to ASCII character "P"
+The third position in the fifth row `15` is offset `0x42` in order from top to bottom:
+- has no mnemonic but corresponds to ASCII character "`B`"
 - a value of `0x15` which means "set RS to 1 and D4-D7 to `0b0101`"
-- D0-D3 are copied from the low bits of the data value `0b0000`
-- sending this byte value of `80` will output a "`P`" character and advance the cursor
+- D0-D3 are copied from the low bits of the offset value `0b0010`
+- sending this command will output a "`B`" character and advance the cursor
+  on the LCD display
 
-All mnemonics are exported as simple variables in a python module
+All mnemonics are exported from this table as simple variables in a python module
 [`baconstants.py`](https://github.com/wardi/cpu/blob/main/bad-apple/baconstants.py):
 
 ```python
@@ -84,6 +82,10 @@ CRT = b"\x03"
 ```
 
 ## Initialization
+
+The video is encoded into a Python script `video.py` that will generate the video
+binary file `video.bin`. On startup the LCD display needs to be initialized, so the
+script starts with:
 
 ```python
 with open('video.bin', 'wb') as f:
