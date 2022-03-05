@@ -18,7 +18,6 @@ to simulate a full bitmap display.
 
 ## Encoder Files
 
-<img src="/images/encoder-files.svg" height="300" alt="Encoder files">
 ![Encoder files](/images/encoder-files.svg)
 
 The encoder is made of a number of Python scripts, some that generate
