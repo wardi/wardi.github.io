@@ -29,20 +29,20 @@ display persistence for the illusion of a full bitmap display.
 The encoder is made of a number of Python scripts, some that generate
 other Python scripts.
 
-- [↗`extract.py`](https://github.com/wardi/cpu/blob/main/bad-apple/extract.py)
+- [🔗extract.py`](https://github.com/wardi/cpu/blob/main/bad-apple/extract.py)
   uses OpenCV to convert the `badapple.mp4` input video to a bitmap format suitable for
   encoding `badapple.enc.gz`.
-- [↗`lookup_table.py`](https://github.com/wardi/cpu/blob/main/bad-apple/lookup_table.py)
+- [🔗lookup_table.py`](https://github.com/wardi/cpu/blob/main/bad-apple/lookup_table.py)
   generates the lookup table binary `ltable.bin` and a Python module with mnemonics
   for values in the table
-  [↗`baconsts.py`](https://github.com/wardi/cpu/blob/main/bad-apple/baconsts.py).
-- [↗`encoder.py`](https://github.com/wardi/cpu/blob/main/bad-apple/encoder.py)
+  [🔗baconsts.py`](https://github.com/wardi/cpu/blob/main/bad-apple/baconsts.py).
+- [🔗encoder.py`](https://github.com/wardi/cpu/blob/main/bad-apple/encoder.py)
   encodes `badapple.enc.gz` into a Python script that exports the video binary file
   `video.bin` using the table mnemonics from `baconsts.py`.
 
 ## Lookup Table
 
-[↗`lookup_table.py`](https://github.com/wardi/cpu/blob/main/bad-apple/lookup_table.py)
+[🔗lookup_table.py`](https://github.com/wardi/cpu/blob/main/bad-apple/lookup_table.py)
 contains a text version of the command lookup table:
 
 ```python
@@ -81,7 +81,7 @@ The third position in the fifth column "`14`" is offset `0x42` in order from top
 
 All mnemonic offset values are exported from this table as simple variables in a
 Python module
-[↗`baconstants.py`](https://github.com/wardi/cpu/blob/main/bad-apple/baconstants.py):
+[🔗baconstants.py`](https://github.com/wardi/cpu/blob/main/bad-apple/baconstants.py):
 
 ```python
 C00 = b"\x00"
