@@ -70,7 +70,7 @@ The second position on the left "`CLR:00`" is offset `0x01` in order from top to
 
 The third position in the fifth column "`14`" is offset `0x42` in order from top to bottom:
 - has no mnemonic but corresponds to ASCII character "`B`"
-- has a hex value of `0x15` which means "set RS to 1 and D4-D7 to `0b0100`"
+- has a hex value of `0x14` which means "set RS to 1 and D4-D7 to `0b0100`"
 - D0-D3 are copied from the low bits of the offset value `0b0010`
 - sending this command will output a "`B`" character and advance the cursor
   on the LCD display
@@ -159,6 +159,12 @@ At the start of the video we need to draw an all-black screen (all pixels on)
 so the first few frames are spent drawing boxes:
 ```python
 ...
+    f.write(b'\xff')
+    f.write(b'\xff')
+    f.write(b'\xff')
+    f.write(b'\xff')
+    f.write(b'\xff')
+    f.write(b'\xff')
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀ frame 0
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀ bytes sent 6
 # ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ position 6
