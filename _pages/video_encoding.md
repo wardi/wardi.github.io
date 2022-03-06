@@ -146,8 +146,13 @@ of pixels different between ideal and display frames,
 of screen positions to CGRAM character indexes.
 
 These comments are responsible for `video.py` being more than 10MB
-so it's not stored in the same repo. 👉 Run `encoder.py badapple.enc.gz`
-to generate `video.py` on your own machine.
+so it's not stored in the same repo.
+
+👉 Generate `video.py` on your own machine to follow along:
+
+```bash
+$ python encoder.py badapple.enc.gz > video.py
+```
 
 ## Drawing Boxes
 
