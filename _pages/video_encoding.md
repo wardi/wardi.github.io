@@ -10,9 +10,13 @@ Watch "Bad Apple on 32K EEPROM" on Youtube](https://youtu.be/TkhVqe8Z2lY)
 This is part two of a two-part series. [Read part one here](/bad-apple).
 
 In this post we encode the full Bad Apple video into 32 kilobytes using
-an 8-bit lookup table driving an HD44780 display.
-We also juggle 8 CGRAM characters across an 8 x 4 video area
-to simulate a full bitmap display.
+an 8-bit lookup table to drive an HD44780-powered LCD display. We have
+no CPU so our video "compression" is limited to the features of the
+LCD display.
+
+To make it look like we have more than 8 CGRAM characters
+we carefully juggle them across the 8 x 4 video area and lean on LCD
+display persistence for the illusion of a full bitmap display.
 
 <!--more-->
 
