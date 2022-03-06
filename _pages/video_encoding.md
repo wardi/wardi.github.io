@@ -16,6 +16,8 @@ to simulate a full bitmap display.
 
 <!--more-->
 
+<style>.highlight {line-height:1.2}</style> <!--improve braille-pixel appearance-->
+
 ## Encoder Files
 
 <img src="/images/encoder-files.svg" width="450" alt="Encoder Files">
@@ -39,8 +41,6 @@ other Python scripts.
 [`lookup_table.py`](https://github.com/wardi/cpu/blob/main/bad-apple/lookup_table.py)
 contains a text version of the command lookup table:
 
-<img src="/images/hexmap-top.svg" width="510" alt="LCD command mapping">
-
 ```python
 # byte order from top->bottom, left->right
 # (mnemonic:)hex-value
@@ -59,6 +59,8 @@ to the RS line.
 
 Let's look at two examples:
 
+<img src="/images/hexmap-top.svg" width="510" alt="LCD command mapping">
+
 The second position on the left "`CLR:00`" is offset `0x01` in order from top to bottom:
 - has a mnemonic of `CLR`
 - has a hex value of `0x00` which means "set RS to 0 and D4-D7 to `0b0000`"
@@ -66,9 +68,9 @@ The second position on the left "`CLR:00`" is offset `0x01` in order from top to
 - sending this command will clear the screen and reset the cursor position
   on the LCD display
 
-The third position in the fifth column "`15`" is offset `0x42` in order from top to bottom:
+The third position in the fifth column "`14`" is offset `0x42` in order from top to bottom:
 - has no mnemonic but corresponds to ASCII character "`B`"
-- has a hex value of `0x15` which means "set RS to 1 and D4-D7 to `0b0101`"
+- has a hex value of `0x15` which means "set RS to 1 and D4-D7 to `0b0100`"
 - D0-D3 are copied from the low bits of the offset value `0b0010`
 - sending this command will output a "`B`" character and advance the cursor
   on the LCD display
