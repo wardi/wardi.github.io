@@ -20,7 +20,7 @@ display persistence for the illusion of a full bitmap display.
 
 <!--more-->
 
-<style>.highlight {line-height:1.2}</style> <!--improve braille-pixel appearance-->
+<style>.braille-pixels .highlight {line-height:1.1}</style> <!--improve braille-pixel appearance-->
 
 ## Encoder Files
 
@@ -123,6 +123,7 @@ information on every new frame as comments in `video.py`. These comments
 let us more easily find bugs or places for improvement without needing
 to play the video on real hardware:
 
+<div class="braille-pixels">
 ```python
 ...
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣷⣄⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣷⡀⠀ frame 3278
@@ -136,6 +137,7 @@ to play the video on real hardware:
 # ⠿⠿⠇⠿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠽⠿⠇⠿⠿⠇⠿⠿⠇ » ⠿⠿⠇⠿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠿⠇⠿⠿⠇⠿⠿⠇ .
 ...
 ```
+</div>
 
 On the left is the ideal frame from `badapple.enc.gz`, on the right is what
 would be displayed on the LCD display at this point.
@@ -166,6 +168,8 @@ solid block character `b'\xff'` to turn them all on.
 
 At the start of the video we need to draw an all-black screen (all pixels on)
 so the first few frames are spent drawing boxes:
+
+<div class="braille-pixels">
 ```python
 ...
     f.write(b'\xff')
@@ -213,3 +217,4 @@ so the first few frames are spent drawing boxes:
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
 ...
 ```
+</div>
