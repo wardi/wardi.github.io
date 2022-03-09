@@ -43,7 +43,7 @@ other Python scripts.
 ## Lookup Table
 
 [lookup_table.py](https://github.com/wardi/cpu/blob/main/bad-apple/lookup_table.py)
-contains a text version of the [command lookup table](/images/hexmap.svg):
+contains a text version of the [command lookup table](/bad-apple/#command-lookup-table):
 
 ```python
 # byte order from top->bottom, left->right
@@ -62,7 +62,7 @@ connected to the high data lines of the HD44780 controller and the next bit is c
 to the RS line.
 
 Let's look at two examples and compare with the original
-[command lookup table](/images/hexmap.svg):
+[command lookup table](/bad-apple/#command-lookup-table):
 
 <img src="/images/hexmap-top.svg" width="510" alt="LCD command mapping">
 
@@ -82,7 +82,7 @@ The third position in the fifth column "`14`" is offset `0x42` in order from top
 
 All mnemonic offset values are exported from this table as simple variables in a
 Python module
-[baconstants.py](https://github.com/wardi/cpu/blob/main/bad-apple/baconstants.py):
+[baconsts.py](https://github.com/wardi/cpu/blob/main/bad-apple/baconsts.py):
 
 ```python
 C00 = b"\x00"
@@ -99,7 +99,7 @@ binary file `video.bin`. On startup the LCD display needs to be initialized, so 
 script starts with:
 
 ```python
-from baconstants import *
+from baconsts import *
 
 with open('video.bin', 'wb') as f:
     f.write(
@@ -161,7 +161,7 @@ $ python encoder.py badapple.enc.gz > video.py
 
 Drawing a blank space or solid block character to any location in the
 video area is one of the simplest updates. If the cursor is not already
-in position we first send a [cursor movement command](/images/screen.svg)
+in position we first send a [cursor movement command](/bad-apple/#lcd-display-memory)
 e.g. `E00` to move to the first character in the second row.
 
 Next send a space character `b' '` to turn off all pixels in a 5x8 cell or a
@@ -223,12 +223,12 @@ so the first few frames are spent drawing blocks:
 ## Drawing Pixels
 
 Drawing pixels on the screen requires:
-- moving the cursor to the [CGRAM area](/images/cg-pattern.svg),
+- moving the cursor to the [CGRAM area](/bad-apple/#cgram)
   e.g. `C20` for the first line of CGRAM character `GC2`
 - filling 8 bytes of data, only the least significant 5 bits
   matter so we use commands `b'@'` (all 0s) through `b'_'` (all 1s)
   in the ASCII command range
-- moving the cursor to the [desired location](/images/screen.svg)
+- moving the cursor to the [desired location](/bad-apple/#lcd-display-memory)
   e.g. `E27` for the bottom-right corner of the screen
 - writing the CGRAM character to display the CGRAM pattern at
   this location e.g. `CG2`
