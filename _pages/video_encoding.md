@@ -49,8 +49,8 @@ contains a text version of the [command lookup table](/bad-apple/#command-lookup
 # (mnemonic:)hex-value
 </span><span class="n">hex_map</span> <span class="o">=</span> <span class="s">"""
 C00:04 C20:05 12 13 14 15 16 17 D00:08 D16:09 D32:0a C40:06 E00:0c E16:0d E32:0e C60:07
-<span class="c">CLR:00</span> C21:05 12 13 14 15 16 17 D01:08 D17:09 C01:04 C41:06 E01:0c E17:0d E33:0e C61:07
-HOM:00 C22:05 12 13 <span class="c">14</span> 15 16 17 D02:08 D18:09 C02:04 C42:06 E02:0c E18:0d E34:0e C62:07
+<span class="c1">CLR:00</span> C21:05 12 13 14 15 16 17 D01:08 D17:09 C01:04 C41:06 E01:0c E17:0d E33:0e C61:07
+HOM:00 C22:05 12 13 <span class="c1">14</span> 15 16 17 D02:08 D18:09 C02:04 C42:06 E02:0c E18:0d E34:0e C62:07
   R:01 C23:05 12 13 14 15 16 17 D03:08 D19:09 C03:04 C43:06 E03:0c E19:0d E35:0e C63:07
 ...
 </span></code></pre></div></div>
@@ -177,8 +177,8 @@ so the first few frames are spent drawing blocks:
     <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\xff</span><span class="s">'</span><span class="p">)</span>
     <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\xff</span><span class="s">'</span><span class="p">)</span>
     <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\xff</span><span class="s">'</span><span class="p">)</span>
-<span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » <span class="n">⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀⠀⠀⠀ frame 0
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » <span class="n">⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀⠀⠀⠀ bytes sent 6
+<span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » <span class="s">⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀⠀⠀⠀ frame 0
+# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » <span class="s">⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀⠀⠀⠀ bytes sent 6
 # ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ position D06
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ delta 1040
 # ⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
@@ -193,9 +193,9 @@ so the first few frames are spent drawing blocks:
     <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\xff</span><span class="s">'</span><span class="p">)</span>
 <span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇<span class="n">⣿⣿⡇⣿⣿⡇</span> frame 1
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇<span class="n">⣿⣿⡇⣿⣿⡇</span> bytes sent 11
-# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » <span class="n">⣶⣶⡆⣶⣶⡆</span>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ position E02
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » <span class="n">⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ delta 880
-# ⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ » <span class="n">⠉⠉⠁⠉⠉⠁</span>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
+# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » <span class="s">⣶⣶⡆⣶⣶⡆</span>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ position E02
+# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » <span class="s">⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ delta 880
+# ⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ » <span class="s">⠉⠉⠁⠉⠉⠁</span>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ cgram 0/8
 # ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ {}
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
@@ -207,9 +207,9 @@ so the first few frames are spent drawing blocks:
     <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\xff</span><span class="s">'</span><span class="p">)</span>
 <span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 2
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ bytes sent 16
-# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⣶⣶⡆<span class="n">⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆</span>⠀⠀⠀ position E07
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇<span class="n">⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀ delta 680
-# ⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ » ⠉⠉⠁⠉⠉⠁<span class="n">⠉⠉⠁⠉⠉⠁⠉⠉⠁⠉⠉⠁⠉⠉⠁</span>⠀⠀⠀ ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
+# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⣶⣶⡆<span class="s">⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆</span>⠀⠀⠀ position E07
+# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇<span class="s">⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀ delta 680
+# ⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ » ⠉⠉⠁⠉⠉⠁<span class="s">⠉⠉⠁⠉⠉⠁⠉⠉⠁⠉⠉⠁⠉⠉⠁</span>⠀⠀⠀ ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ cgram 0/8
 # ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ {}
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
@@ -232,12 +232,10 @@ Drawing pixels on the screen requires:
 
 
 <div class="braille-pixels"></div>
-
-```python
-...
-    f.write(C20) # assign CG2 to E27 (9 steps)
-    f.write(b'@')
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠃⠀⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠃⠀⠀⠀⠀⠀⠀⠀⠀ frame 23
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">C20</span><span class="p">)</span> <span class="c1"># assign CG2 to E27 (9 steps)
+</span>    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'@'</span><span class="p">)</span>
+<span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠃⠀⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠃⠀⠀⠀⠀⠀⠀⠀⠀ frame 23
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀ bytes sent 122
 # ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀ position C21
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀ delta 22
@@ -246,12 +244,12 @@ Drawing pixels on the screen requires:
 # ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣃⠀⠀⠀⠀⠀ » ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣀⠀⠀⠀⠀⠀ E26:CG1 D05:CG0
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣆⠀⠀⠀⠀ .
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠆⠀⠀⠀ » ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠆⠀⠀⠀ .
-    f.write(b'@')
-    f.write(b'@')
-    f.write(b'@')
-    f.write(b'@')
-    f.write(b'X')
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⡟⠀⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠃⠀⠀⠀⠀⠀⠀⠀⠀ frame 24
+</span>    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'@'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'@'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'@'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'@'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'X'</span><span class="p">)</span>
+<span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⡟⠀⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠃⠀⠀⠀⠀⠀⠀⠀⠀ frame 24
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀ bytes sent 127
 # ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀ position C26
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠟⠀⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀ delta 35
@@ -260,12 +258,12 @@ Drawing pixels on the screen requires:
 # ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⡃⠀⠀⠀⠀ » ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣀⠀⠀⠀⠀⠀ E26:CG1 D05:CG0
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣇⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣆⠀⠀⠀⠀ .
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠦⠀⠀ » ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠆⠀⠀⠀ .
-    f.write(b'X')
-    f.write(b'\\')
-    f.write(E27)
-    f.write(CG2)
-    f.write(E26)
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⠃⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠃⠀⠀⠀⠀⠀⠀⠀⠀ frame 25
+</span>    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'X'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\\</span><span class="s">'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">E27</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">CG2</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">E26</span><span class="p">)</span>
+<span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⠃⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠃⠀⠀⠀⠀⠀⠀⠀⠀ frame 25
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠁⠀⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀ bytes sent 132
 # ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣖⡀⣀⡀⠀⠀⠀⠀⠀⠀⠀ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀ position E26
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⡃⠀⠀⠀⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀ delta 63
@@ -273,9 +271,10 @@ Drawing pixels on the screen requires:
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣧⠀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⠀⠀⠀⠀⠀⠀ cgram 3/8
 # ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⠀⠀⠀⠀ » ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣀⠀⠀⠀⠀⠀ E26:CG1 D05:CG0 E27:CG2
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡀⠀⠀⠀ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣆⠀⠀⠀⠀ .
-# ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠄⠀ » ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠆⠿⠄⠀ .
-...
-```
+# ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠄⠀ » ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠆<span class="s">⠿⠄</span>⠀ .
+</span><span class="p">...</span>
+</code></pre></div></div>
+
 
 Notice that we've spent about two frames (11 bytes) updating
 just a single character cell. That's very slow if need to update
@@ -297,45 +296,43 @@ Example in-place pixel update of CGRAM character `CG0` at
 position `E04` (the witch's back and hat) in only 7 bytes:
 
 <div class="braille-pixels"></div>
-
-```python
-...
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 571
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 571
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ bytes sent 2889
-# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀⠐⢶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀⠐⢶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ position C66
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⠀⠐⠸⠇⠿⠿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣷⡁⠀⠘⠇⠿⠿⡇⣿⣿⡇⣿⣿⡇ delta 8
+# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀⠐⢶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀<span class="s">⠐⢶⡆</span>⣶⣶⡆⣶⣶⡆⣶⣶⡆ position C66
+# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⠀⠐⠸⠇⠿⠿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣷⡁<span class="s">⠀⠘⠇</span>⠿⠿⡇⣿⣿⡇⣿⣿⡇ delta 8
 # ⣭⣭⡅⣭⣭⡅⣭⣤⡄⣤⣤⡄⣄⣠⡄⣀⣀⡀⣭⣭⡅⣭⣭⡅ » ⣭⣭⡅⣭⣭⡅⣭⣤⡄⣤⣤⡄⣄⣠⡄⣤⣀⡄⣭⣭⡅⣭⣭⡅
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ cgram 6/8
 # ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ E05:CG2 D25:CG4 E04:CG0 E02:CG3 D24:CG7 E03:CG6
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ .
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ .
-    f.write(b'^')
-    f.write(b'D')
-    f.write(C00) # update assigned CG0 at E04
-    f.write(b'G')
-    f.write(b'O')
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 572
+</span>    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'^'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'D'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">C00</span><span class="p">)</span> <span class="c1"># update assigned CG0 at E04
+</span>    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'G'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'O'</span><span class="p">)</span>
+<span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 572
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ bytes sent 2894
-# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀⠐⢶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀⠠⢶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ position C02
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⠀⠐⠸⠇⡿⢿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣷⠁⠀⠘⠇⠿⠿⡇⣿⣿⡇⣿⣿⡇ delta 12
+# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀⠐⢶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀<span class="s">⠠⢶⡆</span>⣶⣶⡆⣶⣶⡆⣶⣶⡆ position C02
+# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⠀⠐⠸⠇⡿⢿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣷⠁<span class="s">⠀⠘⠇</span>⠿⠿⡇⣿⣿⡇⣿⣿⡇ delta 12
 # ⣭⣭⡅⣭⣭⡅⣭⣤⡄⣤⣤⡄⣄⣠⡄⣀⣀⡀⣭⣭⡅⣭⣭⡅ » ⣭⣭⡅⣭⣭⡅⣭⣤⡄⣤⣥⡄⣄⣠⡄⣤⣀⡄⣭⣭⡅⣭⣭⡅
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ cgram 6/8
 # ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ E05:CG2 D25:CG4 E02:CG3 D24:CG7 E03:CG6 E04:CG0
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ .
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ .
-    f.write(b'G')
-    f.write(C04)
-    f.write(b'K')
-    f.write(b'C')
-    f.write(E05)
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 573
+</span>    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'G'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">C04</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'K'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'C'</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">E05</span><span class="p">)</span>
+<span class="c1"># ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 573
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ bytes sent 2899
-# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀⠰⢶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀⠠⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ position E05
-# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣷⠁⠐⠸⠇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣷⠁⠐⠸⠇⠿⠿⡇⣿⣿⡇⣿⣿⡇ delta 11
+# ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀⠰⢶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣄⠀<span class="s">⠠⣶⡆</span>⣶⣶⡆⣶⣶⡆⣶⣶⡆ position E05
+# ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣷⠁⠐⠸⠇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣷⠁<span class="s">⠐⠸⠇</span>⠿⠿⡇⣿⣿⡇⣿⣿⡇ delta 11
 # ⣭⣭⡅⣭⣭⡅⣥⣤⡄⣤⣥⡄⣄⣠⡄⣀⣀⡁⣭⣭⡅⣭⣭⡅ » ⣭⣭⡅⣭⣭⡅⣭⣤⡄⣤⣥⡄⣄⣠⡄⣤⣀⡄⣭⣭⡅⣭⣭⡅
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ cgram 6/8
 # ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ E05:CG2 D25:CG4 E02:CG3 D24:CG7 E03:CG6 E04:CG0
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ .
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ .
-...
-```
+</span><span class="p">...</span>
+</code></pre></div></div>
