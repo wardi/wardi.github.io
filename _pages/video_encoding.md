@@ -217,6 +217,49 @@ so the first few frames are spent drawing blocks:
 </span><span class="p">...</span>
 </code></pre></div></div>
 
+## Clearing the screen
+
+When enough of the screen pixels need to be switched from on to off
+we can clear the whole screen with a single `CLR` command:
+
+<div class="braille-pixels"></div>
+
+```
+...
+# ⢿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 789
+# ⠀⠉⠃⠿⣿⡇⣿⣿⡇⣿⡟⠁⠙⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⡟⠁⠛⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ bytes sent 3989
+# ⠀⠀⠀⠀⠀⠀⠲⢶⡆⡒⠀⡀⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⣶⣶⡆⣶⣶⡆⠂⠀⡀⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ position E23
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠁⠓⠶⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣶⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ delta 559
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠩⠅⣭⣭⡅⣭⣭⡅⣭⣭⡅ » ⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ cgram 3/8
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠃⢛⣛⡃ » ⠛⠛⠃⠛⠛⠃⠛⠛⠃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ E03:CG4 D04:CG3 D03:CG0
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠃ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ .
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ .
+    f.write(CLR)
+    f.write(D05)
+    f.write(b'\xff')
+    f.write(b'\xff')
+    f.write(b'\xff')
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠇⢿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 790
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡇⡟⠙⠃⢿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡇⣿⣿⡇⣿⣿⡇ bytes sent 3994
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣶⡆⠀⠀⠀⠀⠀⠂⠶⣶⡆⣶⣶⡆ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ position D08
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠻⢿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ delta 103
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ▴▴▴▴▴▴
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ cgram 0/8
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
+# ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
+...
+```
+
+This can prevent falling too far behind on screen updates when large
+parts of the screen are changing, but is distracting if overused.
+
+We strike a balance by only clearing the screen when at least
+[half of the pixels displayed are wrong](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L298)
+and the number of wrong pixels is at least 1.5 times the number of
+pixels that should be "on".
+
 ## Drawing Pixels
 
 Drawing pixels on the screen requires:
@@ -280,17 +323,23 @@ Notice that we've spent about two frames (11 bytes) updating
 just a single character cell. That's very slow if need to update
 the whole screen this way.
 
+## Optimization strategies
+
 We mitigate the slow speed of pixel updates a few different ways:
-- do all block updates first (just 1 or 2 bytes per character
-  cell)
-- update cells that are only a few pixels different than
-  all-on or all-off last (block updates are fine for these)
+- do all screen clearing and
+  [block updates first](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L320)
+  (just 1 or 2 bytes per character cell)
+- update based on the state [a couple frames ahead](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L345)
+- prefer to not update cells that are only a
+  [few pixels different](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L349)
+  than "all-on" or "all-off" (block updates are fine for these)
 - don't update cells that will become all-on or all-off
-  in a few frames anyway
-- choose the unassigned CGRAM character that has the smallest
-  difference to save a few bytes updating pixel data
+  [in a few frames](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L351)
+- choose the unassigned CGRAM character that has the
+  [smallest difference](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L405)
+  to save a few bytes updating pixel data
 - when updating a cell already assigned to a CGRAM character,
-  update the pixel data in-place
+  [update the pixel data in-place](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L381)
 
 Example in-place pixel update of CGRAM character `CG0` at
 position `E04` (the witch's back and hat) in only 7 bytes:
@@ -336,3 +385,5 @@ position `E04` (the witch's back and hat) in only 7 bytes:
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ .
 </span><span class="p">...</span>
 </code></pre></div></div>
+
+
