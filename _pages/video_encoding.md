@@ -4,12 +4,11 @@ title: Video Encoding at 5 bytes/frame
 permalink: /video-encoding/
 image: /images/encoder-files.png
 description:
-  We encode the full Bad Apple video into 32KB using an 8-bit lookup driving
-  an HD44780-powered LCD display. We have no CPU so our video “compression”
-  is limited to the features of the LCD display.
-
-  To create an illusion of a full bitmap display we carefully juggle 8 CGRAM
-  characters across the 8 x 4 video area and lean on LCD display persistence.
+  We encode a full 3 minute video into 32KB using Python.
+  Our playback hardware has no CPU so video “compression”
+  is limited to the features of its LCD display.
+  We create an illusion of a full bitmap display by carefully
+  juggling 8 CGRAM characters across the 8 x 4 video area.
 ---
 
 [![Bad Apple on 32K EEPROM](/images/arms-wide.jpg)
