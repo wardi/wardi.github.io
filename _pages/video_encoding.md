@@ -427,8 +427,6 @@ cover when juggling CGRAM characters:
 
 ![More than 8 active character cells](/images/umbrella.jpg)
 
-![Also more than 8 active character cells](images/1.2kbit.jpg)
-
 But eviction adds another 2 bytes to each character cell update, so pixel updates
 can now take up to 13 bytes each. At 13 bytes each we can only update about
 11 character cells per second.
@@ -440,13 +438,38 @@ With too many cells needing pixel updates not even display persistence will help
 Some parts of the original Bad Apple video have more detail than can be reasonably
 be displayed by juggling 8 CGRAM characters across a 8 x 4 video area at 11 updates
 per second.
+For these parts of the video we scale the video to fill 6 x 3 cells instead of the
+full video area to reduce the number of character cells that need juggling:
 
-There are also iconic scenes that are poorly rendered because of significant movement
+![Shrunken video](/images/shrink.jpg)
+
+Also there are some iconic scenes that are poorly rendered because of significant movement
 on screen, extremely low bitrate and a fairly basic encoding algorithm. For these scenes
 we have edited the original video to reduce motion to give our encoder a
 chance to display something recognizable.
 
-For parts of the video with too much detail we shrink the video to fill 6 x 3 cells
-to reduce the number of character cells that need juggling:
 
-![Shrunken video](/images/shrink.jpg)
+## Down time
+
+While most of the time the encoder is frantically trying to keep up with screen updates
+there are a few moments during the video where nothing is changing on the screen.
+
+These brief pauses give us a chance to draw some text messages on the right side of the screen:
+
+![Also more than 8 active character cells](/images/1.2kbit.jpg)
+
+These messages will stay visible until the next time the [screen is cleared](#clearing-the-screen).
+
+## Wrapping up
+
+Thank you! You made it all the way to the end! 🍺 
+
+In this post we demonstrated encoding the full Bad Apple video into 32 kilobytes
+using an 8-bit lookup table driving an HD44780-powered LCD display.
+We made it look like we had more than 8 CGRAM characters using display
+persistence and careful juggling across the 8 x 4 video area.
+
+This project is an offshoot of a [Homebrew CPU build](/cpu/) that is being published as
+a video series on YouTube.
+
+All the [code for this project](https://github.com/wardi/cpu/tree/main/bad-apple) is available on github.
