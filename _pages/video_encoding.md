@@ -386,22 +386,67 @@ position `E04` (the witch's back and hat) in only 7 bytes:
 </span><span class="p">...</span>
 </code></pre></div></div>
 
-# Up in the air
+## Up in the air
 
-When pixel updates in the video are constrained to 8 character cells the
-illusion of full screen video is very convincing:
+When pixel updates in the video are constrained to 8 character cells or less
+and all updates are in-place the illusion of full 8 x 4 character cell video is very
+convincing:
 
 ![8 active character cells](/images/corners.jpg)
 
-But when more than 8 character cells needing pixel updates we start juggling
+But when more than 8 character cells need pixel updates we must start juggling
 CGRAM characters by
 [evicting the oldest](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L421)
-character cell and moving its CGRAM character to a new location on screen.
+character cell and using its CGRAM character at a new location on screen
+for every pixel update.
 
-The LCD character display has "display persistence" meaning it hangs on
+<div class="braille-pixels"></div>
+
+```python
+...
+    f.write(D01) # evict CG5 at D01
+    f.write(b'\xff')
+    f.write(C50) # reassign CG5 to E02
+    f.write(b'@')
+    f.write(b'@')
+# ⣿⣿⡇⣿⣿⡇⠞⠛⠃⠛⢻⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⠿⠛⠃⠙⢛⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 5494
+# ⣿⣿⡇⡟⠁⠀⠀⠀⠀⢼⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⠀⠀⠀⢶⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ bytes sent 27746
+# ⣶⣶⡆⠀⠀⠀⠀⠀⠀⢀⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ » ⣶⣶⡆⠀⠀⠀⠀⠀⠀⢀⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆⣶⣶⡆ position C52
+# ⣿⣿⠀⠀⢀⡆⣷⡄⠀⠺⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⠀⠀⠀⠀⠀⠀⠻⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ delta 66
+# ⣭⣭⡄⣤⣭⡅⣭⠅⠀⠀⠈⠅⢩⣭⡅⣭⣭⡁⣭⣭⡅⣭⣭⡅ » ⣭⣭⡅⣤⣤⡄⡄⠀⠀⠀⠉⠅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ ▴▴▴▴
+# ⣿⣿⡇⣿⣿⡇⣿⠇⠀⠀⢴⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⡷⠀⠀⠀⢴⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ cgram 7/8
+# ⣛⣛⡃⣛⠛⠃⠁⠀⠀⠀⢘⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⣛⣛⡃⡛⠛⠃⠀⠀⠀⠀⣘⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ D02:CG6 D22:CG2 E23:CG7 D03:CG4 E03:CG1 E21:CG0 D23:CG3
+# ⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⢸⡇⣿⣿⡃⣿⣿⡇⣿⣿⡇⣿⣿⠇ » ⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⢿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ .
+# ⠿⠿⠇⠶⠤⠀⠀⠀⠀⠀⠸⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠿⠿⠇⠶⠤⠄⠀⠀⠀⠀⠸⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ .
+...
+```
+
+Our LCD character display has "display persistence" meaning it hangs on
 to what was previously displayed for a short time. This effect gives us some
 cover when juggling CGRAM characters:
 
 ![More than 8 active character cells](/images/umbrella.jpg)
 
+![Also more than 8 active character cells](images/1.2kbit.jpg)
 
+But eviction adds another 2 bytes to each character cell update, so pixel updates
+can now take up to 13 bytes each. At 13 bytes each we can only update about
+11 character cells per second.
+
+With too many cells needing pixel updates not even display persistence will help us.
+
+## Cheating (a little)
+
+Some parts of the original Bad Apple video have more detail than can be reasonably
+be displayed by juggling 8 CGRAM characters across a 8 x 4 video area at 11 updates
+per second.
+
+There are also iconic scenes that are poorly rendered because of significant movement
+on screen, extremely low bitrate and a fairly basic encoding algorithm. For these scenes
+we have edited the original video to reduce motion to give our encoder a
+chance to display something recognizable.
+
+For parts of the video with too much detail we shrink the video to fill 6 x 3 cells
+to reduce the number of character cells that need juggling:
+
+![Shrunken video](/images/shrink.jpg)
