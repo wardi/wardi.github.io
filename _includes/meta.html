@@ -2,6 +2,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=0.86, maximum-scale=5.0'>
 
+{# these seem to be handled by jekyll-seo
     {% if page.excerpt %}
     <meta property="og:description" content="{{ page.excerpt| strip_html }}" />
     {% elsif page.description %}
@@ -23,3 +24,4 @@
     <meta property="og:image" content="{{ site.url }}{{ site.avatar }}"/>
     <meta property="twitter:image" content="{{ site.url }}{{ site.avatar }}"/>
     {% endif %}
+#}
