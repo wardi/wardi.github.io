@@ -224,7 +224,7 @@ we can clear the whole screen with a single `CLR` command:
 
 <div class="braille-pixels"></div>
 
-```
+```python
 ...
 # ⢿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ frame 789
 # ⠀⠉⠃⠿⣿⡇⣿⣿⡇⣿⡟⠁⠙⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⡟⠁⠛⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ bytes sent 3989
@@ -264,7 +264,7 @@ pixels that should be "on".
 
 Drawing pixels on the screen requires:
 - moving the cursor to the [CGRAM area](/bad-apple/#cgram)
-  e.g. `C20` for the first line of CGRAM character `GC2`
+  e.g. `C20` for the first line of CGRAM character `CG2`
 - filling 8 bytes of data, only the least significant 5 bits
   matter so we use commands `b'@'` (all 0s) through `b'_'` (all 1s)
   in the ASCII command range
@@ -385,5 +385,23 @@ position `E04` (the witch's back and hat) in only 7 bytes:
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ .
 </span><span class="p">...</span>
 </code></pre></div></div>
+
+# Up in the air
+
+When pixel updates in the video are constrained to 8 character cells the
+illusion of full screen video is very convincing:
+
+![8 active character cells](/images/corners.jpg)
+
+But when more than 8 character cells needing pixel updates we start juggling
+CGRAM characters by
+[evicting the oldest](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L421)
+character cell and moving its CGRAM character to a new location on screen.
+
+The LCD character display has "display persistence" meaning it hangs on
+to what was previously displayed for a short time. This effect gives us some
+cover when juggling CGRAM characters:
+
+![More than 8 active character cells](/images/umbrella.jpg)
 
 
