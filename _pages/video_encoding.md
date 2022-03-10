@@ -396,7 +396,7 @@ can now take up to 13 bytes each. At 13 bytes each we can only update about
 
 With too many cells needing pixel updates not even display persistence will help us.
 
-## Cheating (a little)
+## Cheating (just a little)
 
 Some parts of the original Bad Apple video have more detail than can be reasonably
 be displayed by juggling 8 CGRAM characters across a 8 x 4 video area at 11 updates
@@ -411,6 +411,11 @@ We also edit some of the iconic scenes that are poorly rendered because
 of significant movement on screen and extremely low bitrate. For these scenes
 we reduce the motion to give our encoder a chance to display something recognizable.
 
+Finally we save some space by trimming the all-black frames at the beginning
+and the end of the video. We
+[trim 80 all-black frames](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L449)
+in total and use the 400 bytes saved to give ourselves an extra byte for
+video data every 16 frames or so.
 
 ## Down time
 
