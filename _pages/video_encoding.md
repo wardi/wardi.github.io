@@ -40,56 +40,7 @@ other Python scripts.
   encodes `badapple.enc.gz` into a Python script that exports the video binary file
   `video.bin` using the table mnemonics from `baconsts.py`.
 
-## Lookup Table
-
-[lookup_table.py](https://github.com/wardi/cpu/blob/main/bad-apple/lookup_table.py)
-contains a text version of the [command lookup table](/bad-apple/#command-lookup-table):
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># byte order from top-&gt;bottom, left-&gt;right
-# (mnemonic:)hex-value
-</span><span class="n">hex_map</span> <span class="o">=</span> <span class="s">"""
-C00:04 C20:05 12 13 14 15 16 17 D00:08 D16:09 D32:0a C40:06 E00:0c E16:0d E32:0e C60:07
-<span class="c1">CLR:00</span> C21:05 12 13 14 15 16 17 D01:08 D17:09 C01:04 C41:06 E01:0c E17:0d E33:0e C61:07
-HOM:00 C22:05 12 13 <span class="c1">14</span> 15 16 17 D02:08 D18:09 C02:04 C42:06 E02:0c E18:0d E34:0e C62:07
-  R:01 C23:05 12 13 14 15 16 17 D03:08 D19:09 C03:04 C43:06 E03:0c E19:0d E35:0e C63:07
-...
-</span></code></pre></div></div>
-
-The optional mnemonic labels a value and the hex value is the
-value stored at that location in the table. The low 4 bits of the hex value are
-connected to the high data lines of the HD44780 controller and the next bit is connected
-to the RS line.
-
-Let's look at two examples and compare with the original
-[command lookup table](/bad-apple/#command-lookup-table):
-
-<img src="/images/hexmap-top.svg" width="510" alt="LCD command mapping">
-
-The second position on the left "`CLR:00`" is offset `0x01` in order from top to bottom:
-- has a mnemonic of `CLR`
-- has a hex value of `0x00` which means "set RS to 0 and D4-D7 to `0b0000`"
-- D0-D3 are copied from the low bits of the offset value `0b0001`
-- sending this command will clear the screen and reset the cursor position
-  on the LCD display
-
-The third position in the fifth column "`14`" is offset `0x42` in order from top to bottom:
-- has no mnemonic but corresponds to ASCII character "`B`"
-- has a hex value of `0x14` which means "set RS to 1 and D4-D7 to `0b0100`"
-- D0-D3 are copied from the low bits of the offset value `0b0010`
-- sending this command will output a "`B`" character and advance the cursor
-  on the LCD display
-
-All mnemonic offset values are exported from this table as simple variables in a
-Python module
-[baconsts.py](https://github.com/wardi/cpu/blob/main/bad-apple/baconsts.py):
-
-```python
-C00 = b"\x00"
-CLR = b"\x01"
-HOM = b"\x02"
-CRT = b"\x03"
-...
-```
+[update] The last post now describes [lookup_table.py and generation of baconsts.py](/bad-apple/#command-lookup-table).
 
 ## Initialization
 
