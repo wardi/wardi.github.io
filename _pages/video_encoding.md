@@ -3,8 +3,9 @@ layout: page
 title: Video Encoding at 5 bytes/frame
 permalink: /video-encoding/
 image: /images/encoder-files.png
+categories: [Python]
 description:
-  We encode a full 3 minute video into 32KB using Python.
+  We encode a full 3m39s video into 32KB using Python.
   Our playback hardware has no CPU so video “compression”
   is limited to the features of its LCD display.
   We create an illusion of a full bitmap display by carefully
@@ -16,14 +17,14 @@ Watch "Bad Apple on 32K EEPROM" on Youtube](https://youtu.be/TkhVqe8Z2lY)
 
 This is part two of a two-part series. [Read part one here](/bad-apple).
 
-In this post we encode the full Bad Apple video into 32 kilobytes using
-an 8-bit lookup table to drive an HD44780-powered LCD display. We have
-no CPU so our video "compression" is limited to the features of the
-LCD display.
+In this post we use Python to encode the full Bad Apple video
+(3m39s) into 32 kilobytes. Our playback hardware has no CPU so our
+video "compression" is limited to the features of our
+HD44780-powered LCD display.
 
-To make it look like we have more than 8 CGRAM characters
-we carefully juggle them across the 8 x 4 video area and lean on LCD
-display persistence for the illusion of a full bitmap display.
+We create an illusion of a full bitmap display by carefully
+juggling 8 CGRAM characters across the 8 x 4 video area and
+lean on LCD display persistence.
 
 <!--more-->
 
@@ -37,17 +38,18 @@ The encoder is made of a number of Python scripts, some that generate
 other Python scripts.
 
 - [extract.py](https://github.com/wardi/cpu/blob/main/bad-apple/extract.py)
-  uses OpenCV to convert the `badapple.mp4` input video to a bitmap format suitable for
-  encoding `badapple.enc.gz`.
+  uses OpenCV to convert the `badapple.mp4` input video to a bitmap format
+  `badapple.enc.gz` tailored to our LCD display resolution and suitable for
+  encoding.
 - [lookup_table.py](https://github.com/wardi/cpu/blob/main/bad-apple/lookup_table.py)
-  generates the lookup table binary `ltable.bin` and a Python module with mnemonics
+  generates a lookup table binary `ltable.bin` and a Python module with mnemonics
   for values in the table
   [baconsts.py](https://github.com/wardi/cpu/blob/main/bad-apple/baconsts.py).
 - [encoder.py](https://github.com/wardi/cpu/blob/main/bad-apple/encoder.py)
   encodes `badapple.enc.gz` into a Python script that exports the video binary file
   `video.bin` using the table mnemonics from `baconsts.py`.
 
-[update] The last post now describes [lookup_table.py and generation of baconsts.py](/bad-apple/#command-lookup-table).
+[update] The first post now describes [lookup_table.py and generation of baconsts.py](/bad-apple/#command-lookup-table).
 
 ## Initialization
 
@@ -97,16 +99,17 @@ to play the video on real hardware:
 ...
 ```
 
-On the left is the ideal frame from `badapple.enc.gz`, on the right is what
-would be displayed on the LCD display at this point.
-`frame` is the frame number, `bytes sent` is the position within the file,
-`position` is the cursor position on the display, `delta` is the number
-of pixels different between ideal and display frames,
-`cgram` is the number of CGRAM characters in use and the mapping
-of screen positions to CGRAM character indexes.
+ - the left "image" is the ideal frame from `badapple.enc.gz`
+ - the right "image" is what would be displayed on the LCD display at this point in time
+ - `frame` is the frame number
+ - `bytes sent` is the position within the file
+ - `position` is the cursor position on the display
+ - `delta` is the number of pixels different between ideal and display images
+ - `cgram` is the number of CGRAM characters in use and the mapping
+of screen positions to CGRAM character indexes
 
-These comments are responsible for `video.py` being more than 10MB
-so it's not stored in the same repo.
+These frame comparisons are responsible for `video.py` being more than 10MB
+so we're not storing a copy in the same repo.
 
 👉 Follow along by generating `video.py` on your own machine:
 
@@ -116,12 +119,12 @@ $ python encoder.py badapple.enc.gz > video.py
 
 ## Drawing Blocks
 
-Drawing a blank space or solid block character to any location in the
+Drawing a blank space or solid block character at any location in the
 video area is one of the simplest updates. If the cursor is not already
 in position we first send a [cursor movement command](/bad-apple/#lcd-display-memory)
 e.g. `E00` to move to the first character in the second row.
 
-Next send a space character `b' '` to turn off all pixels in a 5x8 cell or a
+Next we send a space character `b' '` to turn off all pixels in a 5x8 cell or a
 solid block character `b'\xff'` to turn them all on.
 
 At the start of the video we need to draw an all-black screen (all pixels on)
@@ -286,20 +289,22 @@ the whole screen this way.
 We mitigate the slow speed of pixel updates a few different ways:
 - do all screen clearing and
   [block updates first](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L320)
-  (just 1 or 2 bytes per character cell)
-- update based on the state [a couple frames ahead](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L345)
+- update based on the state
+  [a couple frames ahead](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L345)
+  so that the cell painted is correct when drawn
 - prefer to not update cells that are only a
   [few pixels different](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L349)
   than "all-on" or "all-off" (block updates are fine for these)
 - don't update cells that will become all-on or all-off
-  [in a few frames](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L351)
+  [in a few frames](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L351),
+  wasting our effort when the cell is cleared
 - choose the unassigned CGRAM character that has the
   [smallest difference](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L405)
   to save a few bytes updating pixel data
 - when updating a cell already assigned to a CGRAM character,
   [update the pixel data in-place](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L381)
 
-Example in-place pixel update of CGRAM character `CG0` at
+Example of an in-place pixel update of CGRAM character `CG0` at
 position `E04` (the witch's back and hat) in only 7 bytes:
 
 <div class="braille-pixels"></div>
@@ -356,7 +361,7 @@ But when more than 8 character cells need pixel updates we must start juggling
 CGRAM characters by
 [evicting the oldest](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L421)
 character cell and using its CGRAM character at a new location on screen
-for every pixel update.
+for every pixel character cell update.
 
 <div class="braille-pixels"></div>
 
@@ -396,15 +401,15 @@ With too many cells needing pixel updates not even display persistence will help
 Some parts of the original Bad Apple video have more detail than can be reasonably
 be displayed by juggling 8 CGRAM characters across a 8 x 4 video area at 11 updates
 per second.
-For these parts of the video we scale the video to fill 6 x 3 cells instead of the
-full video area to reduce the number of character cells that need juggling:
+For these parts of the video we edit the video beforehand to scale the
+frame to fill 6 x 3 cells instead of the full video area. This reduces the number
+of character cells that need juggling:
 
 ![Shrunken video](/images/shrink.jpg)
 
-Also there are some iconic scenes that are poorly rendered because of significant movement
-on screen, extremely low bitrate and a fairly basic encoding algorithm. For these scenes
-we have edited the original video to reduce motion to give our encoder a
-chance to display something recognizable.
+We also edit some of the iconic scenes that are poorly rendered because
+of significant movement on screen and extremely low bitrate. For these scenes
+we reduce the motion to give our encoder a chance to display something recognizable.
 
 
 ## Down time
@@ -412,20 +417,23 @@ chance to display something recognizable.
 While most of the time the encoder is frantically trying to keep up with screen updates
 there are a few moments during the video where nothing is changing on the screen.
 
-These brief pauses give us a chance to draw some text messages on the right side of the screen:
+These brief pauses give us a chance to
+[draw some text messages](https://github.com/wardi/cpu/blob/963e6843e24dcffaa64e349e125b04c109824200/bad-apple/encoder.py#L48)
+on the right side of the screen:
 
 ![Also more than 8 active character cells](/images/1.2kbit.jpg)
 
-These messages will stay visible until the next time the [screen is cleared](#clearing-the-screen).
+These messages stay visible until the next time the [screen is cleared](#clearing-the-screen).
 
 ## Wrapping up
 
-Thank you! You made it all the way to the end! 🍺 
+Nicely done, you made it all the way to the end! 🍺
 
 In this post we demonstrated encoding the full Bad Apple video into 32 kilobytes
-using an 8-bit lookup table driving an HD44780-powered LCD display.
-We made it look like we had more than 8 CGRAM characters using display
-persistence and careful juggling across the 8 x 4 video area.
+using Python.
+We made it look like we had a bitmap display by using display
+persistence on our HD44780-powered LCD and by carefully juggling
+8 CGRAM characters across the 8 x 4 video area.
 
 This project is an offshoot of a [Homebrew CPU build](/cpu/) that is being published as
 a video series on YouTube.
