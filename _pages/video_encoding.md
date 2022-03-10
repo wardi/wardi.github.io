@@ -2,6 +2,11 @@
 layout: page
 title: Video Encoding at 5 bytes/frame
 permalink: /video-encoding/
+image: /images/encoder-files.svg
+excerpt:
+  In this post we encode the full Bad Apple video into 32 kilobytes using an 8-bit lookup table to drive an HD44780-powered LCD display. We have no CPU so our video “compression” is limited to the features of the LCD display.
+
+  To make it look like we have more than 8 CGRAM characters we carefully juggle them across the 8 x 4 video area and lean on LCD display persistence for the illusion of a full bitmap display."
 ---
 
 [![Bad Apple on 32K EEPROM](/images/arms-wide.jpg)
@@ -134,7 +139,7 @@ so the first few frames are spent drawing blocks:
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ delta 1040
 # ⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ cgram 0/8
-# ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ {}
+# ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
 </span>    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\xff</span><span class="s">'</span><span class="p">)</span>
@@ -148,7 +153,7 @@ so the first few frames are spent drawing blocks:
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » <span class="s">⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ delta 880
 # ⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ » <span class="s">⠉⠉⠁⠉⠉⠁</span>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ cgram 0/8
-# ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ {}
+# ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
 </span>    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\xff</span><span class="s">'</span><span class="p">)</span>
@@ -162,7 +167,7 @@ so the first few frames are spent drawing blocks:
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⣿⣿⡇⣿⣿⡇<span class="s">⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇</span>⠀⠀⠀ delta 680
 # ⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅⣭⣭⡅ » ⠉⠉⠁⠉⠉⠁<span class="s">⠉⠉⠁⠉⠉⠁⠉⠉⠁⠉⠉⠁⠉⠉⠁</span>⠀⠀⠀ ▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴▴
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ cgram 0/8
-# ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ {}
+# ⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃⣛⣛⡃ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
 # ⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇⣿⣿⡇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
 # ⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇⠿⠿⠇ » ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ .
 </span><span class="p">...</span>
