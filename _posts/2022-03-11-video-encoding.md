@@ -1,15 +1,15 @@
 ---
-layout: page
+layout: post
 title: Video Encoding at 5 bytes/frame
-permalink: /video-encoding/
-image: /images/encoder-files.png
 categories: [Python]
+image: /images/encoder-files.png
 description:
   We encode a full 3m39s video into 32KB using Python.
   Our playback hardware has no CPU so video “compression”
   is limited to the features of its LCD display.
   We create an illusion of a full bitmap display by carefully
   juggling 8 CGRAM characters across the 8 x 4 video area.
+excerpt_separator: <!--more-->
 ---
 
 [![Bad Apple on 32K EEPROM](/images/arms-wide.jpg)
