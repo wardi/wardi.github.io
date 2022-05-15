@@ -45,3 +45,10 @@ permalink: /cpu/
 [![Clock Halt Circuit with 4011 NAND Gate and 555 Timer](/images/halt.jpg)](https://youtu.be/-j5fzLaksTk)
 
 [transcript](/halt/)
+
+## SST39SF040 512k Flash Upgrade
+
+[![SST39SF040 512k Flash Upgrade](/images/512k.jpg)](https://youtu.be/UDAXxEo3heA)
+
+[transcript](/512k-flash/)
+
