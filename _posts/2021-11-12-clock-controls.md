@@ -13,7 +13,7 @@ We add a potentiometer and a single-step button to our clock circuit.
 
 ## Schematic:
 
-![Schematic](/images/clock_controls_schematic.png)
+[![Schematic](/images/clock_controls_schematic.png)](/images/clock_controls_schematic.png)
 
 ## Transcript:
 
