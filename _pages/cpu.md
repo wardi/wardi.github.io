@@ -20,7 +20,7 @@ permalink: /cpu/
 
 [![Manual Clock Circuit Controls](/images/clock_controls.jpg)](https://youtu.be/LNIVcQHGDm4)
 
-[transcript](/clock-controls/)
+[schematic & transcript](/clock-controls/)
 
 ## Synchronous 4-bit Binary Counter 74LS163
 
