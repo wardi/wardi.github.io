@@ -64,7 +64,7 @@ with open('video.bin', 'wb') as f:
     f.write(
         INI + # function set: initial setup
         HID + # hidden cursor
-        EI0 + # entry incrementing, no shift
+        EIN + # entry incrementing, no shift
         CLR
     )
 ...
@@ -72,7 +72,7 @@ with open('video.bin', 'wb') as f:
 
 The `INI` command sets the LCD display into 8-bit mode. This can only be done
 once after initial powerup and is ignored afterwards. `HID` enables the display
-but disables the blinking and underline cursor modes. `EI0` disables screen
+but disables the blinking and underline cursor modes. `EIN` disables screen
 shifting on output and makes the cursor increment to the next location after
 each character is written.
 
