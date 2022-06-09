@@ -1,6 +1,17 @@
 ---
 ---
 
+.yt-screen {
+  text-align:center;
+  color: white;
+  background: #333;
+  line-height:1em;
+  padding-bottom: 0.2em;
+  img::after {
+    content: "▶ watch on YouTube";
+  }
+}
+
 //
 // IMPORTS
 //

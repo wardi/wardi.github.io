@@ -6,12 +6,9 @@ permalink: /cpu/
 
 ## Homebrew CPU Plan Step 1
 
-[
-<div style="text-align:center; background: white; line-height:1em;">
-![Homebrew CPU Plan Step 1](/images/step1.jpg)
-watch video on YouTube
-</div>
-](https://youtu.be/QNkcTAgxSCc)
+<a href="https://youtu.be/QNkcTAgxSCc"><div class="yt-screen">
+<img src="/images/step1.jpg" alt="Homebrew CPU Plan Step 1">
+</div></a>
 
 [transcript](/cpu-step-1/)
 
