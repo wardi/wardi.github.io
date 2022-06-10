@@ -10,7 +10,10 @@
   padding-bottom: 0.2em;
 }
 .yt-screen::after {
-  content: "▶ watch on YouTube";
+  content: "▶ watch on youtube";
+}
+.yt-screen:hover {
+  color: white;
 }
 
 //

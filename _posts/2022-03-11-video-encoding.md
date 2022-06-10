@@ -12,8 +12,9 @@ description:
 excerpt_separator: <!--more-->
 ---
 
-[![Bad Apple on 32K EEPROM](/images/arms-wide.jpg)
-Watch "Bad Apple on 32K EEPROM" on Youtube](https://youtu.be/TkhVqe8Z2lY)
+<a href="https://youtu.be/TkhVqe8Z2lY" class="yt-screen">
+<img src="/images/arms-wide.jpg" alt="Bad Apple on 32K EEPROM">
+</a>
 
 This is part two of a two-part series. [Read part one here](/bad-apple).
 

@@ -5,7 +5,9 @@ categories: [Electronics]
 excerpt_separator: <!--more-->
 ---
 
-[![Manual Clock Circuit Controls](/images/clock_controls.jpg)](https://youtu.be/LNIVcQHGDm4)
+<a href="https://youtu.be/LNIVcQHGDm4" class="yt-screen">
+<img src="/images/clock_controls.jpg" alt="Manual Clock Circuit Controls">
+</a>
 
 We add a potentiometer and a single-step button to our clock circuit.
 

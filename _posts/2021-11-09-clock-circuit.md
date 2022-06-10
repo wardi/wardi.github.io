@@ -5,7 +5,9 @@ categories: [Electronics]
 excerpt_separator: <!--more-->
 ---
 
-[![Simple Clock Circuit with a 555 Timer](/images/555.jpg)](https://youtu.be/QfnkuXDf6NE)
+<a href="https://youtu.be/QfnkuXDf6NE" class="yt-screen">
+<img src="/images/555.jpg" alt="Simple Clock Circuit with a 555 Timer">
+</a>
 
 In this video we create a clock circuit with a 555 timer in astable mode, and use it to blink a green LED.
 
