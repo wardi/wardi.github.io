@@ -84,3 +84,13 @@ We complete our clock module by adding a halt signal and test it with our addres
 We build a larger address register and use it to test an SST39SF040 512k flash chip.
 
 [transcript](/512k-flash/)
+
+## Milestone 1: LCD Character Display
+
+<a href="https://youtu.be/neW9uogt1gw" class="yt-screen">
+<img src="/images/milestone1.jpg" alt="LCD Character Display">
+</a>
+
+We connect an HD44780-powered LCD character display to the circuit and play a simple text animation from the program ROM.
+
+[transcript](/milestone-1/)
