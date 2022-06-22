@@ -73,7 +73,7 @@ We add a reset circuit to our clock module that resets our address register to "
 
 We complete our clock module by adding a halt signal and test it with our address register. Now our (future) programs won't have to run forever.
 
-[transcript](/halt/)
+[schematic & transcript](/halt/)
 
 ## SST39SF040 512k Flash Upgrade
 
