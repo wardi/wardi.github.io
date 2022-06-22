@@ -17,6 +17,8 @@ We add a potentiometer and a single-step button to our clock circuit.
 
 [![Schematic](/images/clock_controls_schematic.png)](/images/clock_controls_schematic.png)
 
+[kicad source](https://github.com/wardi/cpu/tree/main/schematics)
+
 ## Transcript:
 
 In the last video we built a simple clock circuit with a 10k resistor and a 10 microfarad capacitor.
