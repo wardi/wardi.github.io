@@ -94,3 +94,13 @@ We build a larger address register and use it to test an SST39SF040 512k flash c
 We connect an HD44780-powered LCD character display to the circuit and play a simple text animation from the program ROM.
 
 [transcript](/milestone-1/)
+
+## CMOS vs TTL: What are logic families?
+
+<a href="https://youtu.be/1TpLYx1iZD4" class="yt-screen">
+<img src="/images/logic-families.jpg" alt="Replaced 4011 with 7400">
+</a>
+
+In this video we replace our clock's 4011 CMOS Quad-NAND gate IC with a TTL equivalent and discuss compatibility between different logic families.
+
+[transcript](/logic-families/)
