@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Homebrew CPU Project
+title: 20xt6 Homebrew CPU Project
 permalink: /cpu/
 ---
 
