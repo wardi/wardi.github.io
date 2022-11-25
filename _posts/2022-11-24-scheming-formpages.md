@@ -18,12 +18,12 @@ With [ckanext-scheming](https://github.com/ckan/ckanext-scheming) 3.0
 
 ```yaml
 - start_form_page:
-    title: Detailed Metadata
+    title: Detailed Info
     description:
       These fields improve search and give users important links
 
-  field_name: address
-  label: Address
+  field_name: tag_string
+  label: Tags
 ```
 
 Each `start_form_page` block marks a field at the beginning of a new page of fields.
