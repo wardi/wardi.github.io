@@ -6,7 +6,7 @@ redirect_from:
 excerpt_separator: <!--more-->
 ---
 
-<img src="/images/formpages.jpg" alt="ckanext-scheming 3.0 form pages">
+<img src="/images/formpages.png" alt="ckanext-scheming 3.0 form pages">
 
 With [ckanext-scheming](https://github.com/ckan/ckanext-scheming) 3.0
 [CKAN](https://ckan.org) dataset metadata forms may now be split across multiple pages using
