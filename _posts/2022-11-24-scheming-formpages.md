@@ -8,8 +8,11 @@ excerpt_separator: <!--more-->
 
 <a href="/images/formpages.png"><img src="/images/formpages.png" alt="ckanext-scheming 3.0 form pages"></a>
 
-With [ckanext-scheming](https://github.com/ckan/ckanext-scheming) 3.0
-[CKAN](https://ckan.org) dataset metadata forms may now be split across multiple pages using
+[ckanext-scheming](https://github.com/ckan/ckanext-scheming) is a [CKAN](https://ckan.org) extension for
+customizing dataset, group and organization metadata forms, validation rules and display templates.
+
+With ckanext-scheming 3.0 CKAN
+dataset metadata forms may now be split across multiple pages using
 [`start_form_page`](https://github.com/ckan/ckanext-scheming/blob/master/README.md#start_form_page).
 
 [Example ckanext-scheming schema](https://github.com/ckan/ckanext-scheming/blob/master/ckanext/scheming/ckan_formpages.yaml):
