@@ -1,5 +1,6 @@
 ---
-layout: post
+layout: page
+permalink: /flood-fill-mazes/
 title: Flood Fill Maze Generation
 categories: [Python]
 image: /images/maze4.png
