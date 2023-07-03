@@ -15,17 +15,23 @@ We generate mazes using the scikit-image `flood_fill` function.
 
 <!--more-->
 
-First we'll need a few common Python libraries:
+<style>.language-plaintext .highlight {background: black}</style>
+
+We'll need jupyter and a few common Python libraries:
 
 ```bash
 $ pip install jupyter matplotlib scikit-image
 ```
 
+Launch jupyter notebooks and follow along:
+
 * [Flood fill maze generation jypyter notebook](https://github.com/wardi/cpu/blob/main/maze/presentation.ipynb)
 
-The examples below will use numpy for fast array operatios,
+The examples below will use numpy for efficient array operations,
 matplotlib for visualization, and scikit-image for image
-manipulation. All the imports are gathered in one place here:
+manipulation. Imports are at the the top of the project, as usual.
+If you get any errors running these imports make sure you have
+the dependencies above installed:
 
 ```python
 import numpy as np
@@ -39,25 +45,23 @@ from skimage.transform import resize
 from skimage.filters import threshold_local
 ```
 
-## Starting with a box
+## Square one
 
 Our maze needs a border, a starting location, and an ending location.
-Let's represent that with a numpy array where the border is marked with `1`s,
+Let's represent our maze with a numpy array where the border is marked with `1`s,
 the starting and ending locations are marked with `2`s and everything else
 is set to `0`.
 
-Here's a function to generate this box with any width and height:
+This function will generate such an array with any width and height. We follow
+numpy's (y, x) convention for coordinates, so height comes first:
 
 ```python
 def box(height, width):
     arr = np.zeros((height, width), dtype=np.uint8)
-    # walls
-    arr[0] = 1
-    arr[-1] = 1
-    arr[..., 0] = 1
-    arr[..., -1] = 1
-    arr[0, 1] = 2
-    arr[-1, -2] = 2
+    # walls top, bottom, left, right = 1
+    arr[0] = arr[-1] = arr[..., 0] = arr[..., -1] = 1
+    # start and end locations = 2
+    arr[0, 1] = arr[-1, -2] = 2
     return arr
 
 b = box(6, 6)
@@ -73,9 +77,10 @@ array([[1, 2, 1, 1, 1, 1],
        [1, 1, 1, 1, 2, 1]], dtype=uint8)
 ```
 
-Matplotlib can display this array with colors and a legend for reference.
-We choose a bright palette, create a legend with color patches, and draw
-an array passed with our `show` function:
+Let's visualize our array with matplotlib.
+["inferno"](https://matplotlib.org/stable/tutorials/colors/colormaps.html#sequential)
+is a nice a bright palette. We create a legend with color patches, and draw
+arrays with this `show` function:
 
 ```python
 palette = mpl.cm.inferno.resampled(3).colors
@@ -84,6 +89,7 @@ labels = ["0: unfilled", "1: wall", "2: passage"]
 def show(arr):
     plt.figure(figsize=(9, 9))
     im = plt.imshow(palette[arr])
+    # create a legend on the side
     patches = [mpatches.Patch(color=c, label=l) for c, l in zip(palette, labels)]
     plt.legend(handles=patches, bbox_to_anchor=(1.1, 1), loc=2, borderaxespad=0)
     plt.show()
@@ -91,9 +97,15 @@ def show(arr):
 show(b)
 ```
 
-<img src="/images/maze_box1.png" alt="box with legend">
+<img src="/images/maze_box1.png" alt="6x6 box with unfilled, wall, passage legend">
 
-Let's find the starting and ending locations using numpy's `array.where` method:
+Very nice! We can see the starting and ending locations (passages) at
+(y=0, x=1) and (y=5, x=4).
+
+## Lay of the land
+
+Instead of hard-coding them we can find the starting and ending locations
+using numpy's `array.where` method:
 
 ```python
 np.where(b == 2)
@@ -103,14 +115,11 @@ np.where(b == 2)
 (array([0, 5]), array([1, 4]))
 ```
 
-This gives us arrays with the y coordinates and the x coordinates of each location,
-but we need the y and x values for just one of these locations.
-
-`zip` generates tuples with one item from each argument and `next`
-takes the first tuple:
+This gives us arrays with the y coordinates and the x coordinates of each location.
+For our program we need the y and x values for just one of these locations:
 
 ```python
-start = next(zip(*np.where(b == 2)))
+start = tuple(coord[0] for coord in np.where(b == 2))
 start
 ```
 
@@ -118,7 +127,7 @@ start
 (0, 1)
 ```
 
-Next we collect the unfilled locations in the box:
+Next we collect the unfilled locations in the box (the middle part):
 
 ```python
 np.where(b == 0)
@@ -128,3 +137,168 @@ np.where(b == 0)
 (array([1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4]),
  array([1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]))
 ```
+
+Again we want the (y, x) coordinates not an array of y's and an array of x's
+so let's `swapaxes`:
+
+```python
+np.swapaxes(np.where(b == 0), 0, 1)
+```
+
+```
+array([[1, 1],
+       [1, 2],
+       [1, 3],
+       [1, 4],
+       [2, 1],
+       [2, 2],
+       [2, 3],
+       [2, 4],
+       [3, 1],
+       [3, 2],
+       [3, 3],
+       [3, 4],
+       [4, 1],
+       [4, 2],
+       [4, 3],
+       [4, 4]])
+```
+
+These are the coordinates that our program will turn into either walls or passages.
+
+We're going to need a bigger box for the maze, with many more coordinates to fill:
+
+```python
+a = box(30, 30)
+show(a)
+```
+
+<img src="/images/maze_box2.png" alt="30x30 box with unfilled, wall, passage legend">
+
+## The algorithm
+
+Here's our first `flood_fill` maze generation algorithm "maze1":
+
+1. take all the unfilled coordinates and shuffle their order
+2. save the starting coordinates (anything marked as a passage)
+3. set all the passages to unfilled so the whole array is 0's or 1's.
+4. for each of the unfilled coordinates set it to a 1 (wall)
+   then try flood filling the maze from the starting coordinates with 2's
+   (passage)
+   - if any part of the maze remains a 0 (unfilled) then this wall has divided
+   the maze making some part of it unreachable, so set the wall back to unfilled.
+
+```python
+def maze1(arr):
+    unfilled = np.swapaxes(np.where(arr == 0), 0, 1)
+    np.random.shuffle(unfilled)
+
+    start = tuple(coord[0] for coord in np.where(b == 2))
+    arr = np.copy(arr)
+    arr[arr == 2] = 0
+
+    for lc in unfilled:
+        lc = tuple(lc)
+        arr[lc] = 1
+        t = flood_fill(arr, start, 1)
+        if np.any(t == 0):
+            arr[lc] = 0
+
+    arr[arr == 0] = 2
+    return arr
+
+show(maze1(a))
+```
+
+<img src="/images/maze1.png" alt="maze generated with maze1 algorithm">
+
+So that's something. It is a maze, but I wasn't expecting the maze to allow moving diagonally.
+Also the it's very sparse (mostly walls) and easy to solve.
+
+The first problem is easy to fix. `flood_fill` has a `connectivity` parameter that sets
+the disance each cell can be from the next while allowing the fill to continue.
+
+Here's "maze2" like "maze1" above but with `connectivity=1`:
+
+```python
+def maze2(arr):
+    unfilled = np.swapaxes(np.where(arr == 0), 0, 1)
+    np.random.shuffle(unfilled)
+
+    start = tuple(coord[0] for coord in np.where(b == 2))
+    arr = np.copy(arr)
+    arr[arr == 2] = 0
+
+    for lc in unfilled:
+        lc = tuple(lc)
+        arr[lc] = 1
+        t = flood_fill(arr, start, 1, connectivity=1)  # no diagonals, please
+        if np.any(t == 0):
+            arr[lc] = 0
+
+    arr[arr == 0] = 2
+    return arr
+
+show(maze2(a))
+```
+
+<img src="/images/maze2.png" alt="maze generated with maze2 algorithm">
+
+Better, but the maze is still quite simple.
+
+Our algorithm sets every unfilled cell to a wall as long as that wall
+doesn't cause the maze to be divided. So our walls end up very
+thick because any time a dead-end (a cell with three walls surrounding it)
+is selected it will be turned into a wall as well.
+
+Let's protect our dead-ends to generate more complex mazes with "maze3":
+
+```python
+# mask for cells above, below, left and right
+neighbours = np.array([
+    [0, 1, 0],
+    [1, 0, 1],
+    [0, 1, 0]], dtype=np.uint8)
+
+def maze3(arr):
+    unfilled = np.swapaxes(np.where(arr == 0), 0, 1)
+    np.random.shuffle(unfilled)
+
+    start = tuple(coord[0] for coord in np.where(b == 2))
+    arr = np.copy(arr)
+    arr[arr == 2] = 0
+
+    for lc in unfilled:
+        lc = tuple(lc)
+
+        y, x = lc
+        # protect dead-ends from becoming walls
+        if np.sum(neighbours * arr[y-1:y+2, x-1:x+2]) > 2:
+            continue
+
+        arr[lc] = 1
+        t = flood_fill(arr, start, 1, connectivity=1)
+        if np.any(t == 0):
+            arr[lc] = 0
+
+    arr[arr == 0] = 2
+    return arr
+
+m = maze3(a)
+show(m)
+```
+
+<img src="/images/maze3.png" alt="maze generated with maze3 algorithm">
+
+That's more like it.
+
+With a maze with start and end positions on the edge we can discover the
+path from start to end by flood-filling the walls one side:
+
+```python
+t = flood_fill(m, (0, 0), 0)
+show(t)
+```
+
+<img src="/images/maze3-solved.png" alt="solution to maze generated with maze3 algorithm">
+
