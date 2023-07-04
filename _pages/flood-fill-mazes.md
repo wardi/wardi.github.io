@@ -15,7 +15,10 @@ We generate mazes using the scikit-image `flood_fill` function.
 
 <!--more-->
 
-<style>.language-plaintext .highlight {background: black}</style>
+<style>
+.language-plaintext .highlight {background: black}
+details > img {text-align: center; display: block; margin: 0 auto;}
+</style>
 
 We'll need jupyter and a few common Python libraries:
 
@@ -39,7 +42,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib as mpl
 from skimage.segmentation import flood_fill
-from skimage.io import imread
+from skimage.io import imread, imsave
 from skimage.color import rgb2gray
 from skimage.transform import resize
 from skimage.filters import threshold_local
@@ -319,6 +322,13 @@ show(c)
 
 <img src="/images/maze-grid-pattern.png" alt="alternating grid of passages and walls">
 
+```python
+sm = maze3(c)
+show(sm)
+```
+
+<img src="/images/maze-grid.png" alt="generated standard grid maze">
+
 The same algorithm now produces a common grid maze, but we don't have to stop there.
 
 ## Big brain solution
@@ -391,8 +401,6 @@ We can save our patterns with `imsave` and combine them any way we like with an 
 editor:
 
 ```python
-from skimage.io import imsave
-
 imsave('grid_pattern.png', palette[c])
 imsave('brain_pattern.png', palette[d])
 
