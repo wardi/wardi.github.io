@@ -48,9 +48,9 @@ from skimage.filters import threshold_local
 ## Square one
 
 Our maze needs a border, a starting location, and an ending location.
-Let's represent our maze with a numpy array where the border is marked with `1`s,
-the starting and ending locations are marked with `2`s and everything else
-is set to `0`.
+Let's represent our maze with a numpy array where the border is marked with 1's,
+the starting and ending locations are marked with 2's and everything else
+is set to 0.
 
 This function will generate such an array with any width and height. We follow
 numpy's (y, x) convention for coordinates, so height comes first:
@@ -80,7 +80,7 @@ array([[1, 2, 1, 1, 1, 1],
 Let's visualize our array with matplotlib.
 ["inferno"](https://matplotlib.org/stable/tutorials/colors/colormaps.html#sequential)
 is a nice a bright palette. We create a legend with color patches, and draw
-arrays with this `show` function:
+arrays with this "show" function:
 
 ```python
 palette = mpl.cm.inferno.resampled(3).colors
@@ -119,8 +119,7 @@ This gives us arrays with the y coordinates and the x coordinates of each locati
 For our program we need the y and x values for just one of these locations:
 
 ```python
-start = tuple(coord[0] for coord in np.where(b == 2))
-start
+tuple(coord[0] for coord in np.where(b == 2))
 ```
 
 ```
@@ -244,7 +243,7 @@ show(maze2(a))
 
 <img src="/images/maze2.png" alt="maze generated with maze2 algorithm">
 
-Better, but the maze is still quite simple.
+Better, but the maze is still very easy to solve.
 
 Our algorithm sets every unfilled cell to a wall as long as that wall
 doesn't cause the maze to be divided. So our walls end up very
@@ -255,7 +254,7 @@ Let's protect our dead-ends to generate more complex mazes with "maze3":
 
 ```python
 # mask for cells above, below, left and right
-neighbours = np.array([
+neighbors = np.array([
     [0, 1, 0],
     [1, 0, 1],
     [0, 1, 0]], dtype=np.uint8)
@@ -273,7 +272,7 @@ def maze3(arr):
 
         y, x = lc
         # protect dead-ends from becoming walls
-        if np.sum(neighbours * arr[y-1:y+2, x-1:x+2]) > 2:
+        if np.sum(neighbors * arr[y-1:y+2, x-1:x+2]) > 2:
             continue
 
         arr[lc] = 1
@@ -292,13 +291,120 @@ show(m)
 
 That's more like it.
 
-With a maze with start and end positions on the edge we can discover the
-path from start to end by flood-filling the walls one side:
+This maze has start and end positions on the edge so we can discover the
+path from start to end by flood-filling the walls one side and tracing
+the border between the two different colors:
 
 ```python
+# spoiler
 t = flood_fill(m, (0, 0), 0)
 show(t)
 ```
 
 <img src="/images/maze3-solved.png" alt="solution to maze generated with maze3 algorithm">
+
+## A "normal" maze
+
+To generate mazes that look more like standard grid mazes we can start with a
+pattern of alternating passages and walls:
+
+```python
+c = box(31, 31)
+c[::2, ::2] = 1  # walls on even (y, x) values
+c[1::2, 1::2] = 2  # passages on odd (y, x) values
+show(c)
+```
+
+<img src="/images/maze-grid-pattern.png" alt="alternating grid of passages and walls">
+
+The same algorithm now produces a common grid maze, but we don't have to stop there.
+
+## Big brain solution
+
+Let's take inspiration from nature and generate a maze from a brain coral image:
+
+<img src="/images/brain-coral.jpg" alt="brain coral">
+
+We load the image with `imread` then crop a small part and convert it to
+grayscale using `rgb2gray`:
+
+```python
+brain = imread('brain-coral.jpg')
+crop_brain = rgb2gray(brain[-500:,200:1000])
+plt.figure(figsize=(15, 9))
+im = plt.imshow(crop_brain, plt.cm.gray)
+cb = plt.colorbar()
+```
+
+<img src="/images/brain-coral-gray.png" alt="brain coral cropped in grayscale">
+
+Next reduce the resolution with `resize` and use `threshold_local` to convert
+the grayscale to 1s and 0s:
+
+```python
+small_brain = resize(crop_brain, (50, 80))
+binary_brain = small_brain > threshold_local(small_brain, 15, 'mean')
+plt.figure(figsize=(9, 9))
+im = plt.imshow(binary_brain, plt.cm.gray)
+```
+
+<img src="/images/brain-coral-bw.png" alt="brain coral low resolution black and white">
+
+Then wrap the image with a box and turn the 0s into passages and the 1s into
+unfilled with some modular arithmatic:
+
+```python
+d = box(52, 82)
+insert_brain = (binary_brain + 2) % 3
+d[1:-1, 1:-1] = insert_brain
+show(d)
+```
+
+<img src="/images/brain-coral-pattern.png" alt="brain coral box pattern">
+
+Finally use this pattern to generate a new maze:
+
+```python
+bm = maze2(d)  # maze2 is better: don't need lots of extra dead-ends
+show(bm)
+```
+
+<img src="/images/brain-coral-maze.png" alt="brain coral generated maze">
+
+## Why don't we have both?
+
+We can save our patterns with `imsave` and combine them any way we like with an image
+editor:
+
+```python
+from skimage.io import imsave
+
+imsave('grid_pattern.png', palette[c])
+imsave('brain_pattern.png', palette[d])
+
+# use to create maze_template.png with an image editing program
+```
+
+Draw walls or passages through the image to guide a general path for
+the generated maze to make mazes with any style and difficulty.
+
+Convert the edited RGB image back to unfilled, wall or passage values
+based on the red component from our palette: 188 for the wall color, 252 for
+the passage color and everything else set to unfilled.
+
+```python
+n = imread('maze_template.png')
+n = np.array((n[...,0] == 188) + (n[...,0] == 252) * 2, dtype=np.uint8)
+show(n)
+```
+
+<img src="/images/maze-combined-pattern.png" alt="custom maze pattern">
+
+```python
+mn = maze3(n)
+show(mn)
+```
+
+<img src="/images/maze-combined.png" alt="custom generated maze">
+
 
