@@ -301,7 +301,9 @@ t = flood_fill(m, (0, 0), 0)
 show(t)
 ```
 
+<details><summary>Spoiler</summary>
 <img src="/images/maze3-solved.png" alt="solution to maze generated with maze3 algorithm">
+</details>
 
 ## A "normal" maze
 
