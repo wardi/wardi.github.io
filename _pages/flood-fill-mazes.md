@@ -9,7 +9,7 @@ description:
 excerpt_separator: <!--more-->
 ---
 
-<img src="/images/maze4.png" alt="Maze generated with flood_fill">
+<video src="/images/maze3.mp4" controls="" alt="Maze generated with flood_fill">
 
 We generate mazes using the scikit-image `flood_fill` function.
 
@@ -351,7 +351,7 @@ cb = plt.colorbar()
 <img src="/images/brain-coral-gray.png" alt="brain coral cropped in grayscale">
 
 Next reduce the resolution with `resize` and use `threshold_local` to convert
-the grayscale to 1s and 0s:
+grayscale to 1s and 0s:
 
 ```python
 small_brain = resize(crop_brain, (50, 80))
@@ -363,7 +363,7 @@ im = plt.imshow(binary_brain, plt.cm.gray)
 <img src="/images/brain-coral-bw.png" alt="brain coral low resolution black and white">
 
 Then wrap the image with a box and turn the 0s into passages and the 1s into
-unfilled with some modular arithmatic:
+unfilled using modular arithmatic:
 
 ```python
 d = box(52, 82)
@@ -374,7 +374,8 @@ show(d)
 
 <img src="/images/brain-coral-pattern.png" alt="brain coral box pattern">
 
-Finally use this pattern to generate a new maze:
+When we generate a maze with this pattern the walls can only be placed in the
+unfilled areas so our maze will follow the shape of the brain coral:
 
 ```python
 bm = maze2(d)  # maze2 is better: don't need lots of extra dead-ends
@@ -383,7 +384,7 @@ show(bm)
 
 <img src="/images/brain-coral-maze.png" alt="brain coral generated maze">
 
-If you haven't solved it already here's the solution:
+Here's the solution:
 
 ```python
 # spoiler
@@ -397,25 +398,23 @@ show(t)
 
 ## Why don't we have both?
 
-We can save our patterns with `imsave` and combine them any way we like with an image
-editor:
+Drawing patterns for the algorithm to fill lets us create all sorts of mazes.
+If we save the grid and brain patterns with `imsave` we can use an image editor
+to combine them any way we like:
 
 ```python
 imsave('grid_pattern.png', palette[c])
 imsave('brain_pattern.png', palette[d])
 
-# use to create maze_template.png with an image editing program
+# use these to create combined_pattern.png with an image editing program
 ```
 
-Draw walls or passages through the image to guide a general path for
-the generated maze to make mazes with any style and difficulty.
-
-Convert the edited RGB image back to unfilled, wall or passage values
-based on the red component from our palette: 188 for the wall color, 252 for
-the passage color and everything else set to unfilled.
+We can stitch patterns together and draw walls or passages through the image
+to shape the generated maze solution to any style and difficulty.
 
 ```python
-n = imread('maze_template.png')
+n = imread('combined_pattern.png')
+# use red component to convert RGB to 0:unfilled, 1: wall, 2: passage
 n = np.array((n[...,0] == 188) + (n[...,0] == 252) * 2, dtype=np.uint8)
 show(n)
 ```
@@ -429,7 +428,8 @@ show(mn)
 
 <img src="/images/maze-combined.png" alt="custom generated maze">
 
-We can see the solution follows the general path created in the image editor:
+The solution follows our wandering path up and down through the different
+maze styles:
 
 ```python
 # spoiler
