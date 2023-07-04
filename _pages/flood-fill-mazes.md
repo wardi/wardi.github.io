@@ -212,7 +212,7 @@ show(maze1(a))
 <img src="/images/maze1.png" alt="maze generated with maze1 algorithm">
 
 So that's something. It is a maze, but I wasn't expecting the maze to allow moving diagonally.
-Also the it's very sparse (mostly walls) and easy to solve.
+Also it's very sparse (mostly walls) and easy to solve.
 
 The first problem is easy to fix. `flood_fill` has a `connectivity` parameter that sets
 the disance each cell can be from the next while allowing the fill to continue.
@@ -373,6 +373,18 @@ show(bm)
 
 <img src="/images/brain-coral-maze.png" alt="brain coral generated maze">
 
+If you haven't solved it already here's the solution:
+
+```python
+# spoiler
+t = flood_fill(bm, (0,0), 0)
+show(t)
+```
+
+<details><summary>Spoiler</summary>
+<img src="/images/brain-coral-maze-solved.png" alt="solution to the brain coral maze">
+</details>
+
 ## Why don't we have both?
 
 We can save our patterns with `imsave` and combine them any way we like with an image
@@ -409,4 +421,14 @@ show(mn)
 
 <img src="/images/maze-combined.png" alt="custom generated maze">
 
+We can see the solution follows the general path created in the image editor:
 
+```python
+# spoiler
+t = flood_fill(mn, (0,0), 0)
+show(t)
+```
+
+<details><summary>Spoiler</summary>
+<img src="/images/maze-combined-solved.png" alt="solution to the custom generated maze">
+</details>
