@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /flood-fill-mazes/
-title: Flood Fill Maze Generation
+title: Flood Fill Mazes
 categories: [Python]
 image: /images/maze4.png
 description:
@@ -9,7 +9,7 @@ description:
 excerpt_separator: <!--more-->
 ---
 
-<video src="/images/maze3.mp4" controls="" alt="Maze generated with flood_fill">
+<video style="display:block; margin: 0 auto;" src="/images/maze3.mp4" controls="" alt="Maze generated with flood_fill"></video>
 
 We generate mazes using the scikit-image `flood_fill` function.
 
