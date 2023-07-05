@@ -9,7 +9,7 @@ description:
 excerpt_separator: <!--more-->
 ---
 
-<video style="display:block; margin: 0 auto;" src="/images/maze3.mp4" controls="" alt="Maze generated with flood_fill"></video>
+<img src="/images/maze-bucket.png" alt="paint bucket tool pouring a maze pattern">
 
 We generate mazes using the scikit-image `flood_fill` function.
 
@@ -100,7 +100,7 @@ def show(arr):
 show(b)
 ```
 
-<img src="/images/maze_box1.png" alt="6x6 box with unfilled, wall, passage legend">
+<img src="/images/maze-box1.png" alt="6x6 box with unfilled, wall, passage legend">
 
 Very nice! We can see the starting and ending locations (passages) at
 (y=0, x=1) and (y=5, x=4).
@@ -175,7 +175,7 @@ a = box(30, 30)
 show(a)
 ```
 
-<img src="/images/maze_box2.png" alt="30x30 box with unfilled, wall, passage legend">
+<img src="/images/maze-box2.png" alt="30x30 box with unfilled, wall, passage legend">
 
 ## The algorithm
 
