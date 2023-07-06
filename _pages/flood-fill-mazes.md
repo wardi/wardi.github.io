@@ -11,7 +11,16 @@ excerpt_separator: <!--more-->
 
 <img src="/images/maze-bucket.png" alt="paint bucket tool pouring a maze pattern">
 
-We generate mazes using the scikit-image `flood_fill` function.
+Flood fill functions work like the paint bucket tool in an image editing
+program. They start from one pixel then expand to all connected pixels of
+the same color, replacing them with a new color.
+
+If we start a flood fill from any pixel and afterwards there are no pixels
+left with that color then all pixels in that color must be connected.
+
+In this article we generate mazes using jupyter notebooks, numpy, matplotlib,
+and the scikit-image `flood_fill` function.
+
 
 <!--more-->
 
@@ -20,17 +29,19 @@ We generate mazes using the scikit-image `flood_fill` function.
 details > img {text-align: center; display: block; margin: 0 auto;}
 </style>
 
-We'll need jupyter and a few common Python libraries:
+## Dependencies
+
+First we install jupyter and a few common Python libraries:
 
 ```bash
 $ pip install jupyter matplotlib scikit-image
 ```
 
-Launch jupyter notebooks and follow along:
+This jupyter notebook includes the examples below:
 
 * [Flood fill maze generation jypyter notebook](https://github.com/wardi/cpu/blob/main/maze/presentation.ipynb)
 
-The examples below will use numpy for efficient array operations,
+We use numpy for efficient array operations,
 matplotlib for visualization, and scikit-image for image
 manipulation. Imports are at the the top of the project, as usual.
 If you get any errors running these imports make sure you have
