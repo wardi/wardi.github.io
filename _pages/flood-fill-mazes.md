@@ -11,16 +11,16 @@ excerpt_separator: <!--more-->
 
 <img src="/images/maze-bucket.png" alt="paint bucket tool pouring a maze pattern">
 
-Flood fill functions work like the paint bucket tool in an image editing
-program. They start from one pixel then expand to all connected pixels of
-the same color, replacing them with a new color.
-
-If we start a flood fill from any pixel and afterwards there are no pixels
-left with that color then all pixels in that color must be connected.
-
 In this article we generate mazes using jupyter notebooks, numpy, matplotlib,
 and the scikit-image `flood_fill` function.
 
+"Flood fill" functions work like the paint bucket tool in an image editing
+program. They start from one pixel in an image then expand to all connected pixels
+of the same color, replacing them with a new color.
+
+If we start a flood fill from any pixel in an image and it covers all pixels
+with the same color then they must all be connected, like the path in a maze
+from the beginning to the end.
 
 <!--more-->
 
@@ -31,13 +31,15 @@ details > img {text-align: center; display: block; margin: 0 auto;}
 
 ## Dependencies
 
-First we install jupyter and a few common Python libraries:
+First we install jupyter and a few common Python libraries, and launch
+jupyter notebook:
 
 ```bash
 $ pip install jupyter matplotlib scikit-image
+$ jupyter-notebook
 ```
 
-This jupyter notebook includes the examples below:
+This jupyter notebook file includes all examples in the article:
 
 * [Flood fill maze generation jypyter notebook](https://github.com/wardi/cpu/blob/main/maze/presentation.ipynb)
 
@@ -61,13 +63,12 @@ from skimage.filters import threshold_local
 
 ## Square one
 
-Our maze needs a border, a starting location, and an ending location.
-Let's represent our maze with a numpy array where the border is marked with 1's,
+Our maze needs a border wall, a starting location, and an ending location.
+Let's represent our maze with a numpy array where the border wall is marked with 1's,
 the starting and ending locations are marked with 2's and everything else
 is set to 0.
 
-This function will generate such an array with any width and height. We follow
-numpy's (y, x) convention for coordinates, so height comes first:
+We follow numpy's (y, x) convention for coordinates, so our "box" height comes first:
 
 ```python
 def box(height, width):
@@ -91,9 +92,9 @@ array([[1, 2, 1, 1, 1, 1],
        [1, 1, 1, 1, 2, 1]], dtype=uint8)
 ```
 
-Let's visualize our array with matplotlib.
+Let's visualize our array with matplotlib. Choosing
 ["inferno"](https://matplotlib.org/stable/tutorials/colors/colormaps.html#sequential)
-is a nice a bright palette. We create a legend with color patches, and draw
+as a nice a bright palette, we create a legend with color patches, and draw
 arrays with this "show" function:
 
 ```python
@@ -113,12 +114,12 @@ show(b)
 
 <img src="/images/maze-box1.png" alt="6x6 box with unfilled, wall, passage legend">
 
-Very nice! We can see the starting and ending locations (passages) at
+Very nice! We can see the starting and ending locations at
 (y=0, x=1) and (y=5, x=4).
 
 ## Lay of the land
 
-Instead of hard-coding them we can find the starting and ending locations
+Instead of hard-coding the starting location and ending locations we can find them
 using numpy's `array.where` method:
 
 ```python
@@ -140,7 +141,7 @@ tuple(coord[0] for coord in np.where(b == 2))
 (0, 1)
 ```
 
-Next we collect the unfilled locations in the box (the middle part):
+Next we collect the unfilled coordinates in the box:
 
 ```python
 np.where(b == 0)
@@ -177,9 +178,8 @@ array([[1, 1],
        [4, 4]])
 ```
 
-These are the coordinates that our program will turn into either walls or passages.
-
-We're going to need a bigger box for the maze, with many more coordinates to fill:
+These are the coordinates that will become walls or passages in our maze, but
+first we're going to need a bigger box, with many more coordinates to fill:
 
 ```python
 a = box(30, 30)
@@ -190,16 +190,16 @@ show(a)
 
 ## The algorithm
 
-Here's our first `flood_fill` maze generation algorithm "maze1":
+Here's our first flood fill maze generation algorithm "maze1":
 
 1. take all the unfilled coordinates and shuffle their order
 2. save the starting coordinates (anything marked as a passage)
-3. set all the passages to unfilled so the whole array is 0's or 1's.
-4. for each of the unfilled coordinates set it to a 1 (wall)
-   then try flood filling the maze from the starting coordinates with 2's
-   (passage)
+3. set all the existing passages to unfilled so the whole array is 0's or 1's.
+4. for each of the unfilled coordinates
+   - set it to a 1 (wall) and try flood filling the maze from the starting coordinates
+     with 2's (passage)
    - if any part of the maze remains a 0 (unfilled) then this wall has divided
-   the maze making some part of it unreachable, so set the wall back to unfilled.
+     the maze making some part of it unreachable, so set the wall back to unfilled.
 
 ```python
 def maze1(arr):
@@ -231,7 +231,7 @@ Also it's very sparse (mostly walls) and easy to solve.
 The first problem is easy to fix. `flood_fill` has a `connectivity` parameter that sets
 the disance each cell can be from the next while allowing the fill to continue.
 
-Here's "maze2" like "maze1" above but with `connectivity=1`:
+Here's "maze2" like above but with `connectivity=1`:
 
 ```python
 def maze2(arr):
@@ -257,7 +257,7 @@ show(maze2(a))
 
 <img src="/images/maze2.png" alt="maze generated with maze2 algorithm">
 
-Better, but the maze is still very easy to solve.
+Better, but this maze is still very easy to solve.
 
 Our algorithm sets every unfilled cell to a wall as long as that wall
 doesn't cause the maze to be divided. So our walls end up very
@@ -451,3 +451,11 @@ show(t)
 <details><summary>Spoiler</summary>
 <img src="/images/maze-combined-solved.png" alt="solution to the custom generated maze">
 </details>
+
+This article showed how to generate mazes using jupyter notebooks, numpy, matplotlib,
+and the scikit-image `flood_fill` function.
+
+The mazes started off very simple so we covered ways to increase the complexity
+and design custom patterns to shape the style and general path of the maze solution.
+
+Thank you for reading!
