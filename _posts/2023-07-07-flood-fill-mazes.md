@@ -1,11 +1,8 @@
 ---
-layout: page
-permalink: /flood-fill-mazes/
+layout: post
 title: Flood Fill Mazes
 categories: [Python]
-image: /images/maze4.png
-description:
-  We generate mazes using the scikit-image flood_fill function
+image: /images/maze-combined.png
 excerpt_separator: <!--more-->
 ---
 
