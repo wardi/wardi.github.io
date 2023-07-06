@@ -31,7 +31,7 @@ details > img {text-align: center; display: block; margin: 0 auto;}
 
 ## Dependencies
 
-First we install jupyter and a few common Python libraries, and launch
+First install jupyter and a few common Python libraries, and launch
 jupyter notebook:
 
 ```bash
@@ -41,7 +41,7 @@ $ jupyter-notebook
 
 This jupyter notebook file includes all examples in the article:
 
-* [Flood fill maze generation jypyter notebook](https://github.com/wardi/cpu/blob/main/maze/presentation.ipynb)
+* [Flood fill maze generation jupyter notebook file](https://github.com/wardi/cpu/blob/main/maze/presentation.ipynb)
 
 We use numpy for efficient array operations,
 matplotlib for visualization, and scikit-image for image
