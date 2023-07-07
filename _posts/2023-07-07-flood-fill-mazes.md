@@ -11,7 +11,7 @@ excerpt_separator: <!--more-->
 In this article we generate mazes using jupyter notebooks, numpy, matplotlib,
 and the scikit-image `flood_fill` function.
 
-Almost since the time I could first draw I was fascinated with creating and solving mazes.
+Almost since the first time I could draw I was fascinated with creating and solving mazes.
 Graph paper and mechanical pencils were some of my favorite gifts.
 
 Recently I've rediscovered some of that same childlike excitement by
