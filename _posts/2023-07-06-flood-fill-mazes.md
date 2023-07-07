@@ -6,7 +6,7 @@ image: /images/maze-combined.png
 excerpt_separator: <!--more-->
 ---
 
-<img src="/images/maze-bucket.png" alt="paint bucket tool pouring a maze pattern">
+<img src="/images/maze-bucket.png" alt="paint bucket tool pouring a maze pattern" width=600>
 
 In this article we generate mazes using jupyter notebooks, numpy, matplotlib,
 and the scikit-image `flood_fill` function.
@@ -42,7 +42,7 @@ This jupyter notebook file includes all examples in the article:
 
 We use numpy for efficient array operations,
 matplotlib for visualization, and scikit-image for image
-manipulation. Imports are at the the top of the project, as usual.
+manipulation. Imports are at the top of the project, as usual.
 If you get any errors running these imports make sure you have
 the dependencies above installed:
 
@@ -226,7 +226,7 @@ So that's something. It is a maze, but I wasn't expecting the maze to allow movi
 Also it's very sparse (mostly walls) and easy to solve.
 
 The first problem is easy to fix. `flood_fill` has a `connectivity` parameter that sets
-the disance each cell can be from the next while allowing the fill to continue.
+the distance each cell can be from the next while allowing the fill to continue.
 
 Here's "maze2" like above but with `connectivity=1`:
 
@@ -371,7 +371,7 @@ im = plt.imshow(binary_brain, plt.cm.gray)
 <img src="/images/brain-coral-bw.png" alt="brain coral low resolution black and white">
 
 Then wrap the image with a box and turn the 0s into passages and the 1s into
-unfilled using modular arithmatic:
+unfilled using modular arithmetic:
 
 ```python
 d = box(52, 82)
