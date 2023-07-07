@@ -11,6 +11,23 @@ excerpt_separator: <!--more-->
 In this article we generate mazes using jupyter notebooks, numpy, matplotlib,
 and the scikit-image `flood_fill` function.
 
+Almost since I could first draw I was fascinated with creating and solving mazes.
+Graph paper and mechanical pencils were some of my favorite gifts. Recently I've
+recaptured some of that same childlike excitement by
+[designing and building a homebrew cpu](/cpu/), and the next game I'm building
+for it needs some custom mazes.
+
+There are lots of existing maze generating algorithms but I wanted something that
+filled cells (not grid edges) and that is fast and simple to do in Python so
+it would be easy to tweak and customize.
+
+<!--more-->
+
+<style>
+.language-plaintext .highlight {background: black}
+details > img {text-align: center; display: block; margin: 0 auto;}
+</style>
+
 "Flood fill" functions work like the paint bucket tool in an image editing
 program. They start from one pixel in an image then expand to all connected pixels
 of the same color, replacing them with a new color.
@@ -19,12 +36,6 @@ If we start a flood fill from any pixel in an image and it covers all pixels
 with the same color then they must all be connected, like the path in a maze
 from the beginning to the end.
 
-<!--more-->
-
-<style>
-.language-plaintext .highlight {background: black}
-details > img {text-align: center; display: block; margin: 0 auto;}
-</style>
 
 ## Dependencies
 
