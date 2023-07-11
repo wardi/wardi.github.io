@@ -215,7 +215,7 @@ def maze1(arr):
     unfilled = np.swapaxes(np.where(arr == 0), 0, 1)
     np.random.shuffle(unfilled)
 
-    start = tuple(coord[0] for coord in np.where(b == 2))
+    start = tuple(coord[0] for coord in np.where(arr == 2))
     arr = np.copy(arr)
     arr[arr == 2] = 0
 
@@ -247,7 +247,7 @@ def maze2(arr):
     unfilled = np.swapaxes(np.where(arr == 0), 0, 1)
     np.random.shuffle(unfilled)
 
-    start = tuple(coord[0] for coord in np.where(b == 2))
+    start = tuple(coord[0] for coord in np.where(arr == 2))
     arr = np.copy(arr)
     arr[arr == 2] = 0
 
@@ -286,7 +286,7 @@ def maze3(arr):
     unfilled = np.swapaxes(np.where(arr == 0), 0, 1)
     np.random.shuffle(unfilled)
 
-    start = tuple(coord[0] for coord in np.where(b == 2))
+    start = tuple(coord[0] for coord in np.where(arr == 2))
     arr = np.copy(arr)
     arr[arr == 2] = 0
 
