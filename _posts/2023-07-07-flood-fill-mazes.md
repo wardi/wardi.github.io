@@ -208,6 +208,7 @@ Here's our first flood fill maze generation algorithm "maze1":
      with 2's (passage)
    - if any part of the maze remains a 0 (unfilled) then this wall has divided
      the maze making some part of it unreachable, so set the wall back to unfilled.
+5. all remaining unfilled cells are part of the maze so set them to passages
 
 ```python
 def maze1(arr):
