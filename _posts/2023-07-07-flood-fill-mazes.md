@@ -370,7 +370,7 @@ cb = plt.colorbar()
 <img src="/images/brain-coral-gray.png" alt="brain coral cropped in grayscale">
 
 Next reduce the resolution with `resize` and use `threshold_local` to convert
-grayscale to 1s and 0s:
+grayscale to 1's and 0's:
 
 ```python
 small_brain = resize(crop_brain, (50, 80))
