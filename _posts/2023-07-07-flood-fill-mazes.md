@@ -432,6 +432,8 @@ imsave('brain_pattern.png', palette[d])
 We can stitch patterns together and draw walls or passages through the image
 to shape the generated maze solution to any style and difficulty.
 
+* [combined_pattern.png](https://raw.githubusercontent.com/wardi/cpu/main/maze/combined_pattern.png)
+
 ```python
 n = imread('combined_pattern.png')
 # use red component to convert RGB to 0:unfilled, 1: wall, 2: passage
