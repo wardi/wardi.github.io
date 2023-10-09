@@ -104,3 +104,19 @@ We connect an HD44780-powered LCD character display to the circuit and play a si
 In this video we replace our clock's 4011 CMOS Quad-NAND gate IC with a TTL equivalent and discuss compatibility between different logic families.
 
 [transcript](/logic-families/)
+
+## Homebrew CPU Plan Step 2: Rhythm Game
+
+<a href="https://youtu.be/taPa7SQpib4" class="yt-screen">
+<img src="/images/rhythm-plan.jpg" alt="Designing a Rhythm Game">
+</a>
+
+We're turning a movie-playing circuit into an actual interactive game. This video lays out what we need to do:
+
+- Use the HD44780 scrolling feature for the play field
+- Design custom CGRAM characters
+- Build a controller for user input
+- Build a health tracker to halt the circuit on game over
+- Tie it all together with new logic, opcodes and program code
+
+[transcript](/rhythm-plan/)
