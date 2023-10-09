@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Homebrew CPU Plan Step 2: Rhythm Game'
+title: 'Homebrew CPU Step 2: Rhythm Game Plan'
 categories: [Electronics]
 excerpt_separator: <!--more-->
 ---

@@ -105,7 +105,7 @@ In this video we replace our clock's 4011 CMOS Quad-NAND gate IC with a TTL equi
 
 [transcript](/logic-families/)
 
-## Homebrew CPU Plan Step 2: Rhythm Game
+## Homebrew CPU Step 2: Rhythm Game Plan
 
 <a href="https://youtu.be/taPa7SQpib4" class="yt-screen">
 <img src="/images/rhythm-plan.jpg" alt="Designing a Rhythm Game">
