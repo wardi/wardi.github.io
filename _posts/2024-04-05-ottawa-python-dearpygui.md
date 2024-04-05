@@ -2,7 +2,7 @@
 layout: post
 title: Modernizing the UI stack in Python with DearPyGUI - Ottawa Python
 categories: [Python]
-redirect_from:
+inline: true
 ---
 
 <a href="https://youtu.be/DwMfAp3uvn0" class="yt-screen">
