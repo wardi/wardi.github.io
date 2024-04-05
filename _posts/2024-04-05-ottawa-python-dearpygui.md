@@ -3,11 +3,10 @@ layout: post
 title: Modernizing the UI stack in Python with DearPyGUI - Ottawa Python
 categories: [Python]
 redirect_from:
-excerpt_separator: <!--more-->
 ---
 
 <a href="https://youtu.be/DwMfAp3uvn0" class="yt-screen">
-<img src="/images/ottawa-python-dearpygui.png" alt="DearPyGUI presentation at Ottawa Python">
+<img src="/images/ottawa-python-dearpygui.jpg" alt="DearPyGUI presentation at Ottawa Python">
 
 The <a href="https://www.meetup.com/ottawapython/">Ottawa Python</a>
 meetup group had its first hybrid meeting last week.
