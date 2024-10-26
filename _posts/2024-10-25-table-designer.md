@@ -6,9 +6,13 @@ image: /images/tdb1.png
 excerpt_separator: <!--more-->
 ---
 
+CKAN 2.11 introduces Table Designer: form builder and enforced validation for your data
+
+<img src="/images/tdb4.png" alt="Data Dictionary in Excel" width=600>
+
 This article also appears in the CKAN Blog: [Taming Dynamic Data with Table Designer](https://ckan.org/blog/taming-dynamic-data-with-table-designer) and Table Designer was presented in video form at [CKAN Monthly Live 22](https://www.youtube.com/watch?v=9eD7HDS9PWk&t=362s)
 
-Publishing high-quality data is hard.
+## Publishing high-quality data is hard.
 
 - Data schemas, custom rules, and enforced validation help
 
@@ -22,11 +26,11 @@ Publishing high-quality data over time is much harder.
 
 In CKAN, time series data and regularly updated data is often published as a new CSV or Excel file every release, either replacing an existing file or being added to a growing collection.
 
+<!--more-->
+
 When publishing separate files with CKAN we can use [ckanext-validation](https://github.com/ckan/ckanext-validation) to check our data against a [JSON schema](https://json-schema.org/) but this requires someone checking the reports and fixing errors when they are found. Also, JSON schema is technical and difficult for many users and has limited validation rules.
 
 Even *with* validation, separate files are a challenge for users. For time series data every user first cleans and combines all files themselves, hoping that each release is compatible with the last so they have time left to do their actual work. For frequently updated data the file format or structure might have changed leaving users’ existing tools broken or needing continuous maintenance.
-
-<!--more-->
 
 ## Table Designer is Schema-First
 
