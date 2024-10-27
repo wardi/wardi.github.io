@@ -8,7 +8,7 @@ excerpt_separator: <!--more-->
 
 CKAN 2.11 introduces Table Designer: form builder and enforced validation for your data
 
-<img src="/images/tdb4.png" alt="Data Dictionary in Excel" width=600>
+<img src="/images/tdb4.png" alt="Data Dictionary in Excel">
 
 This article also appears in the CKAN Blog: [Taming Dynamic Data with Table Designer](https://ckan.org/blog/taming-dynamic-data-with-table-designer) and Table Designer was presented in video form at [CKAN Monthly Live 22](https://www.youtube.com/watch?v=9eD7HDS9PWk&t=362s)
 
