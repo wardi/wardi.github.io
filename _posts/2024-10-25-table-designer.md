@@ -8,7 +8,7 @@ excerpt_separator: <!--more-->
 
 CKAN 2.11 introduces Table Designer: form builder and enforced validation for your data
 
-<img src="/images/tdb4.png" alt="Data Dictionary in Excel">
+<img src="/images/tdb4.png" alt="Data Dictionary in Excel" width=800>
 
 This article also appears in the CKAN Blog: [Taming Dynamic Data with Table Designer](https://ckan.org/blog/taming-dynamic-data-with-table-designer) and Table Designer was presented in video form at [CKAN Monthly Live 22](https://www.youtube.com/watch?v=9eD7HDS9PWk&t=362s)
 
@@ -44,7 +44,7 @@ Table Designer creates an empty table for your data in the [DataStore](https://d
 
 As an example, here are fields for collecting municipal bicycle counter time-series data. We want to publish daily counts from each location so we use a date and location as the primary key:
 
-<img src="/images/tdb2.png" alt="Data Dictionary Preview">
+<img src="/images/tdb2.png" alt="Data Dictionary Preview" width=800>
 
 ## Live Validation in a Spreadsheet
 
@@ -52,7 +52,7 @@ With our table created we have a few options for loading data. We can use [ckane
 
 Data types, custom constraints, required fields, and duplicate primary keys are all checked in the template spreadsheet and highlighted for the user. Choice fields are provided as drop-down choice lists. Errors are shown in red, missing required fields are shown in blue:
 
-<img src="/images/tdb3.png" alt="Excel Template">
+<img src="/images/tdb3.png" alt="Excel Template" width=800>
 
 These template spreadsheets let data experts use a familiar tool to collect, combine, and clean up data before it’s published.
 
@@ -64,7 +64,7 @@ Once errors are corrected and data is uploaded, Table Designer presents the data
 
 Simple things should be easy too! If we want to add, edit or delete only a few rows of data Table Designer provides auto-generated web forms:
 
-<img src="/images/tdb6.png" alt="Data entry form">
+<img src="/images/tdb6.png" alt="Data entry form" width=800>
 
 Data can be added, updated or deleted without leaving CKAN and is immediately available for users.
 
@@ -78,7 +78,7 @@ Table Designer automatically extends the generated API documentation on the reso
 
 With many users contributing to the same published data it can be important to record a history of changes. Use CKAN’s activity plugin with [ckanext-dsaudit](https://docs.ckan.org/en/2.11/maintaining/table-designer.html#tracking-changes-with-ckanext-dsaudit) to record insert, update and delete actions with data previews:
 
-<img src="/images/tdb7.png" alt="Activity log of changes">
+<img src="/images/tdb7.png" alt="Activity log of changes" width=800>
 
 ## Bringing it Together
 
