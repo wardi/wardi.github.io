@@ -3,6 +3,7 @@ layout: post
 title: CanWIN Presentation at IEEE IHTC 2025
 categories: [CKAN]
 image: /images/canwin-presentation.jpg.png
+inline: true
 ---
 
 In August I had the privilege to present a paper on the
