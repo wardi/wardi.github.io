@@ -22,7 +22,7 @@ Publishing high-quality data over time is much harder.
 - Validation rules change
 - Publishers and tools producing the data change
 - The way we use the data changes
-- We want use old data and new data together
+- We want to use old data and new data together
 
 In CKAN, time series data and regularly updated data is often published as a new CSV or Excel file every release, either replacing an existing file or being added to a growing collection.
 
